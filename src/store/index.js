@@ -8,6 +8,7 @@ export default new Vuex.Store({
     islogin: false,
     username:"xxx",
     id:0,
+    
   },
   getters: {
   },
