@@ -17,19 +17,15 @@
       </div>
       <div>
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column type="index"> </el-table-column>
-          <el-table-column prop="title" label="标题"></el-table-column>
+          
+          <el-table-column prop="title" label="标题">
+          </el-table-column>
           <el-table-column prop="name" label="作者"></el-table-column>
           <el-table-column prop="date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column>
+          <el-table-column prop="postid" >
             <template slot-scope="scope">
-              <el-link type="primary" @click="seeblog(scope.id)">查看详情（未完成）</el-link>
-            </template>
-          </el-table-column>
-          <el-table-column>
-            <template>
-              <el-link type="primary" href="http://localhost:8080/detail">test to detail</el-link>
+              <el-link type="primary" @click="seeblog(scope.row.postid)">查看详情</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -50,12 +46,14 @@ export default {
           name: "王小虎",
           title: "上海市普陀区金沙江路 1518 弄",
           likes: 10,
+          postid: 1
         },
         {
           date: "2016-05-04",
           name: "王小",
           title: "期末考试",
           likes: 15,
+          postid: 2
         },
       ],
     };
@@ -85,7 +83,10 @@ export default {
           }
         });
       }
-    }
+    },
+    seeblog(val) {
+        this.$router.push("/detail");
+    },
   }
 };
 </script>

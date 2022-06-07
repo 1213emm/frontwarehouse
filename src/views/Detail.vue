@@ -23,10 +23,10 @@
           </el-card>
         </div>
         <div id="actions">
-          <el-button class="act" icon="el-icon-warning" type="danger" circle></el-button>
-          <el-button class="act" icon="el-icon-chat-line-round" type="info" circle></el-button>
-          <el-button class="act" icon="el-icon-star-off" type="warning" circle></el-button>
-          <el-button class="act" icon="el-icon-circle-check" type="primary" circle></el-button>
+          <el-button class="act" icon="el-icon-warning" type="danger" @click="report" circle></el-button><!--举报-->
+          <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" circle></el-button>
+          <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" circle></el-button>
+          <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" circle></el-button>
         </div>
         <div id="comments">
           <div class="floor">
