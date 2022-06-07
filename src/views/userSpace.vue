@@ -1,5 +1,13 @@
 <template>
   <div id="contaner">
+    <div id="down">
+      <nav>
+        <router-link to="/space">用户空间</router-link> |
+        <router-link to="/posts">我的帖子</router-link> |
+        <router-link to="/collections">收藏夹</router-link> |
+        <router-link to="/history">历史记录</router-link> 
+      </nav>
+    </div>
     <div id="up">
       <div id="image">
         <img src="../assets/logo.png" width="100px">
@@ -20,18 +28,12 @@
       </div>
       <div id="text">
         <img src="../assets/密码.png" height="24px">
-        修改密码<br><br>
+        <router-link to="/editPassword">修改密码</router-link><br><br>
         <img src="../assets/密保.png" height="24px">
-        修改密保
+        <router-link to="/editIssue">修改密保</router-link>
       </div>
     </div>
-    <div id="down">
-      <nav>
-        <router-link to="/posts">我的帖子</router-link> |
-        <router-link to="/collections">收藏夹</router-link> |
-        <router-link to="/history">历史记录</router-link> 
-      </nav>
-    </div>
+
   </div>
 </template>
 

@@ -1,7 +1,8 @@
 <template>
   <div id="app">
    <el-header>
-     <nav>  
+     <nav> 
+      <router-link to="/space">去主页</router-link>
      <el-button type="primary" v-on:click="gotologin" v-if="!$store.state.islogin">登录</el-button>
       <h1 v-if="$store.state.islogin">欢迎,
       <router-link to="/User">{{$store.state.username}}</router-link></h1>

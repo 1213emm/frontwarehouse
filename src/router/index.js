@@ -25,6 +25,21 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('../views/register.vue')
+  },
+  {
+    path: '/space',
+    name: 'space',
+    component: () => import('../views/userSpace.vue')
+  },
+  {
+    path: '/editPassword',
+    name: 'editP',
+    component: () => import('../views/editPassword.vue')
+  },
+  {
+    path: '/editIssue',
+    name: 'editI',
+    component: () => import('../views/editIssue.vue')
   }
 ]
 
