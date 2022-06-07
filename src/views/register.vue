@@ -61,7 +61,7 @@ export default {
       }
       this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
-        url: '/register',       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        url: '/api/user/register/',       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           id: this.form.id,
           username: this.form.username,
@@ -72,6 +72,7 @@ export default {
         })
       })
       .then(res => {              /* res 是 response 的缩写 */
+        this.$message.success("注册成功！");
         switch (res.data.errno) {
           case 0:
             this.$message.success("注册成功！");
@@ -89,6 +90,7 @@ export default {
       })
       .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        this.$message.success(err);
       })
     }
   }
