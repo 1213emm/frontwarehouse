@@ -17,7 +17,7 @@
             <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
           </el-menu>
         </div>
-        <div id="favorTable" v-if="this.$store.state.personalIndex===2">
+        <div id="favorTable" v-if="personalIndex===2">
           <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="title" label="标题"></el-table-column>
             <el-table-column prop="name" label="作者"></el-table-column>
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       input: "",
+      personalIndex:1, //根据该值个人空间显示不同的页面
       tableData: [
         {
           date: "2016-05-02",
@@ -63,16 +64,16 @@ export default {
       this.$router.push('/search');
     },
     toInfo: function(){
-      this.$store.commit('toInfo');
+      this.personalIndex=1;
     },
     toFavor: function(){
-      this.$store.commit('toFavor');
+      this.personalIndex=2;
     },
     toHistory: function(){
-      this.$store.commit('toHistory');
+      this.personalIndex=3;
     },
     toMypost: function(){
-      this.$store.commit('toMyPost');
+      this.personalIndex=4;
     },
     toDetail(val) { 
       this.$router.push("/detail");

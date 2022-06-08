@@ -23,45 +23,31 @@
           </el-card>
         </div>
         <div id="actions">
-          <el-button class="act" icon="el-icon-warning" type="danger" @click="report" circle></el-button><!--举报-->
-          <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" circle></el-button>
-          <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" circle></el-button>
-          <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" circle></el-button>
+          <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
+          <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
+          <!--根据是否已收藏返回不同图标-->
+          <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="isFavor">取消收藏</el-button>
+          <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" round v-else>加入收藏</el-button>
+          <!--根据是否已点赞返回不同图标-->
+          <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="isLike">取消点赞</el-button>
+          <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
         </div>
         <div id="comments">
-          <div class="floor">
+          <div class="floor" v-for="item in commentsList" :key="item.floor">
             <div class="speaker">
-              <span style="float:left;margin-top:10px">F2:</span>
-              <span style="float:left;margin-top:10px">评论人</span>
-              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle></el-button>
-              <el-button class="act1" icon="el-icon-warning" type="danger" circle></el-button>
+              <span style="float:left;margin-top:10px">F{{item.floor}}:</span>
+              <span style="float:left;margin-top:10px">{{item.speaker}}</span>
+              <!--根据是否已点赞返回不同图标-->
+              <el-button class="act1" icon="el-icon-success" type="primary" circle @click="unlike1(item.floor)" v-if="item.isLike1"></el-button>
+              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle @click="like1(item.floor)" v-else></el-button>
+              <el-button class="act1" icon="el-icon-warning" type="danger" circle @click="report1(item.floor)"></el-button>
             </div>
-            <div class="say"><el-card>你好</el-card></div>
-          </div>
-          <div class="floor">
-            <div class="speaker">
-              <span style="float:left;margin-top:10px">F3:</span>
-              <span style="float:left;margin-top:10px">评论人</span>
-              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle></el-button>
-              <el-button class="act1" icon="el-icon-warning" type="danger" circle></el-button>
-            </div>
-            <div class="say"><el-card>你好啊红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或</el-card></div>
+            <div class="say"><el-card>{{item.text}}</el-card></div>
           </div>
         </div>
     </el-main>
   </el-container>
 </template>
-
-<!--
-<style>
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-</style>
--->
 
 <style scoped>
 #detail {
@@ -106,7 +92,6 @@
 }
 .act {
   float: right;
-  font-size :120%;
   margin-left: 20px;
 }
 
@@ -132,6 +117,25 @@
 
 <script>
 export default{
+  data(){
+    return{
+      isFavor:false,
+      isLike:false,
+      commentsList:[{
+        floor:2,
+        speaker:"刘备",
+        text:"你好",
+        isLike1:false,//评论是否已经点赞
+      },
+      {
+        floor:3,
+        speaker:"曹操",
+        text:"你好啊",
+        isLike1:false,
+      },
+      ]
+    }
+  },
   methods:{
     personal: function(){
       this.$router.push('/');
@@ -139,6 +143,36 @@ export default{
     returnSearch: function(){
       this.$router.push('/search');
     },
+    report: function(){
+      //交互
+    },//举报帖子
+    favor: function(){
+      this.isFavor=true;
+      //交互
+    },//收藏
+    unfavor: function(){
+      this.isFavor=false;
+      //交互
+    },//取消收藏
+    like: function(){
+      this.isLike=true;
+      //交互
+    },//点赞帖子
+    unlike: function(){
+      this.isLike=false;
+      //交互
+    },//取消点赞帖子
+    like1(val){
+      this.commentsList[val-2].isLike1=true;
+      //交互
+    },//点赞评论，val为楼层编号，2楼即为commentsList[0]，所以减2，然后修改该评论的点赞状态，按钮样式随之改变
+    unlike1(val){
+      this.commentsList[val-2].isLike1=false;
+      //交互
+    },//取消点赞评论
+    report1(val){
+      //交互
+    },//举报评论，val为楼层编号
   }
 }
 </script>
