@@ -13,6 +13,15 @@
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
           <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
+          <el-menu-item @click="toReports" index="5"><i class="el-icon-warning"></i>被举报帖子</el-menu-item>
+        </el-menu>
+      </div>
+      <div>
+        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect" active-text-color="#ffd04b">
+          <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
+          <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
+          <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
+          <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
         </el-menu>
       </div>
       <div id="infoTable" v-if="personalIndex===1">
@@ -106,6 +115,19 @@
           </el-table-column>
         </el-table>
       </div>
+      <div id="reportsTable" v-if="personalIndex===5">
+        <el-table :data="reportsData" style="width: 100%">
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="name" label="作者"></el-table-column>
+          <el-table-column prop="date" label="日期"></el-table-column>
+          <el-table-column prop="times" label="举报次数"></el-table-column>
+          <el-table-column prop="postid" >
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </el-main>
   </el-container>
 </template>
@@ -136,13 +158,6 @@ export default {
           likes: 10,
           postid: 11
         },
-        {
-          date: "2016-05-04",
-          name: "王小",
-          title: "收藏2",
-          likes: 15,
-          postid: 2
-        },
       ],
       historyData: [
         {
@@ -151,13 +166,6 @@ export default {
           title: "历史1",
           likes: 10,
           postid: 11
-        },
-        {
-          date: "2016-05-04",
-          name: "王小",
-          title: "历史2",
-          likes: 15,
-          postid: 2
         },
       ],
       myPostData: [
@@ -168,12 +176,14 @@ export default {
           likes: 10,
           postid: 11
         },
+      ],
+      reportsData: [
         {
-          date: "2016-05-04",
-          name: "王小",
-          title: "已发2",
-          likes: 15,
-          postid: 2
+          date: "2016-05-02",
+          name: "王小虎",
+          title: "举报",
+          times: 10,
+          postid: 11
         },
       ],
     };
@@ -188,7 +198,7 @@ export default {
     },
     edit: function() {
       this.editing=true;
-    },
+    },//编辑个人信息
     save: function() {
       this.editing=false;
       //交互
@@ -212,7 +222,7 @@ export default {
       this.input4="";
       this.input5="";
       this.input6="";
-    },
+    },//保存个人信息
     cancel: function() {
       this.editing=false;
       this.input1="";
@@ -221,7 +231,7 @@ export default {
       this.input4="";
       this.input5="";
       this.input6="";
-    },
+    },//取消编辑个人信息
     toFavor: function(){
       this.personalIndex=2;
       //交互获取收藏夹
@@ -233,6 +243,10 @@ export default {
     toMyPost: function(){
       this.personalIndex=4;
       //交互获取已发帖子
+    },
+    toReports: function(){
+      this.personalIndex=5;
+      //交互获取举报帖子
     },
     toDetail(val) { 
       this.$router.push("/detail");
@@ -263,7 +277,7 @@ export default {
   text-align: center;
   line-height: 200px;
 }
-#infoTable,#favorTable,#historyTable,#myPostTable{
+#infoTable,#favorTable,#historyTable,#myPostTable,#reportsTable{
   margin-top: 20px;
 }
 .infoLable {
