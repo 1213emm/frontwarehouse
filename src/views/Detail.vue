@@ -32,6 +32,11 @@
           <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="isLike">取消点赞</el-button>
           <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
         </div>
+        <div id="addComment" v-if="addComment">
+          <el-input placeholder="你的想法" v-model="input" clearable>
+            <el-button type="primary" icon="el-icon-s-promotion" slot="append" @click="finish">发送</el-button>
+          </el-input>
+        </div>
         <div id="comments">
           <div class="floor" v-for="item in commentsList" :key="item.floor">
             <div class="speaker">
@@ -48,6 +53,99 @@
     </el-main>
   </el-container>
 </template>
+
+<script>
+export default{
+  data(){
+    return{
+      input:"",
+      isFavor:false,
+      isLike:false,
+      addComment:false,
+      commentsList:[{
+        floor:2,
+        speaker:"刘备",
+        text:"你好",
+        isLike1:false,//评论是否已经点赞
+      },
+      {
+        floor:3,
+        speaker:"曹操",
+        text:"你好啊",
+        isLike1:false,
+      },
+      {
+        floor:4,
+        speaker:"曹操",
+        text:"你好啊",
+        isLike1:false,
+      },
+      {
+        floor:5,
+        speaker:"曹操",
+        text:"你好啊",
+        isLike1:false,
+      },
+      {
+        floor:6,
+        speaker:"曹操",
+        text:"你好啊",
+        isLike1:false,
+      },
+      ]
+    }
+  },
+  methods:{
+    personal: function(){
+      this.$router.push('/personal');
+    },
+    returnSearch: function(){
+      this.$router.push('/search');
+    },
+
+    report: function(){
+      //交互
+    },//举报帖子
+    favor: function(){
+      this.isFavor=true;
+      //交互
+    },//收藏
+    unfavor: function(){
+      this.isFavor=false;
+      //交互
+    },//取消收藏
+    like: function(){
+      this.isLike=true;
+      //交互
+    },//点赞帖子
+    unlike: function(){
+      this.isLike=false;
+      //交互
+    },//取消点赞帖子
+    comment: function(){
+      this.addComment=true;
+      //交互
+    },//评论帖子
+    finish: function(){
+      this.addComment=false;
+      //交互
+      window.scrollTo(0, document.body.scrollHeight);//跳转到页面底部，方便查看自己的评论
+    },//发送评论
+
+    like1(val){
+      this.commentsList[val-2].isLike1=true;
+      //交互
+    },//点赞评论，val为楼层编号，2楼即为commentsList[0]，所以减2，然后修改该评论的点赞状态，按钮样式随之改变
+    unlike1(val){
+      this.commentsList[val-2].isLike1=false;
+      //交互
+    },//取消点赞评论
+    report1(val){
+      //交互
+    },//举报评论，val为楼层编号
+  }
+}
+</script>
 
 <style scoped>
 #detail {
@@ -113,66 +211,8 @@
   float: left;
   margin-left: 10px;
 }
-</style>
 
-<script>
-export default{
-  data(){
-    return{
-      isFavor:false,
-      isLike:false,
-      commentsList:[{
-        floor:2,
-        speaker:"刘备",
-        text:"你好",
-        isLike1:false,//评论是否已经点赞
-      },
-      {
-        floor:3,
-        speaker:"曹操",
-        text:"你好啊",
-        isLike1:false,
-      },
-      ]
-    }
-  },
-  methods:{
-    personal: function(){
-      this.$router.push('/');
-    },
-    returnSearch: function(){
-      this.$router.push('/search');
-    },
-    report: function(){
-      //交互
-    },//举报帖子
-    favor: function(){
-      this.isFavor=true;
-      //交互
-    },//收藏
-    unfavor: function(){
-      this.isFavor=false;
-      //交互
-    },//取消收藏
-    like: function(){
-      this.isLike=true;
-      //交互
-    },//点赞帖子
-    unlike: function(){
-      this.isLike=false;
-      //交互
-    },//取消点赞帖子
-    like1(val){
-      this.commentsList[val-2].isLike1=true;
-      //交互
-    },//点赞评论，val为楼层编号，2楼即为commentsList[0]，所以减2，然后修改该评论的点赞状态，按钮样式随之改变
-    unlike1(val){
-      this.commentsList[val-2].isLike1=false;
-      //交互
-    },//取消点赞评论
-    report1(val){
-      //交互
-    },//举报评论，val为楼层编号
-  }
+#addComment {
+  margin-top:30px
 }
-</script>
+</style>

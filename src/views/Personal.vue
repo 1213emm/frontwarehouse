@@ -6,32 +6,29 @@
         <el-button type="primary" @click="toSearch">探索更多</el-button>
       </el-row>
     </el-header>
-    <el-container>
-      
-      <el-main id="main">
-        <div>
-          <el-menu id="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect" active-text-color="#ffd04b">
-            <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
-            <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
-            <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
-            <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
-          </el-menu>
-        </div>
-        <div id="favorTable" v-if="personalIndex===2">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="name" label="作者"></el-table-column>
-            <el-table-column prop="date" label="日期"></el-table-column>
-            <el-table-column prop="likes" label="点赞数"></el-table-column>
-            <el-table-column prop="postid" >
-              <template slot-scope="scope">
-                <el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-main>
-    </el-container>
+    <el-main id="main">
+      <div>
+        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect" active-text-color="#ffd04b">
+          <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
+          <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
+          <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
+          <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
+        </el-menu>
+      </div>
+      <div id="favorTable" v-if="personalIndex===2">
+        <el-table :data="tableData" style="width: 100%">
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="name" label="作者"></el-table-column>
+          <el-table-column prop="date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="postid" >
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </el-main>
   </el-container>
 </template>
 
