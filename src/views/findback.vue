@@ -10,7 +10,7 @@
           <el-input
           type="textarea"
           :placeholder="form.security_issue"
-          :disabled="true"   :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
+          :disabled="true"  :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain float="right" @click="show">显示密保问题</el-button>
