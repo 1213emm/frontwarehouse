@@ -17,7 +17,6 @@
       </div>
       <div>
         <el-table :data="tableData" style="width: 100%">
-          
           <el-table-column prop="title" label="标题">
           </el-table-column>
           <el-table-column prop="name" label="作者"></el-table-column>
@@ -46,7 +45,7 @@ export default {
           name: "王小虎",
           title: "上海市普陀区金沙江路 1518 弄",
           likes: 10,
-          postid: 1
+          postid: 11
         },
         {
           date: "2016-05-04",
@@ -60,7 +59,7 @@ export default {
   },
   methods:{
     personal: function(){
-      this.$router.push('/');
+      this.$router.push('/personal');
     },
     search: function(){
       if (!$store.state.islogin) {
@@ -85,7 +84,7 @@ export default {
       }
     },
     toDetail(val) { 
-        this.$router.push("/detail");
+      this.$router.push("/detail");
     },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/ 
   }
 };

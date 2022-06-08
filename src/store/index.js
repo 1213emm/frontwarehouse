@@ -8,6 +8,7 @@ export default new Vuex.Store({
     islogin: false,
     username:"xxx",
     id:0,
+    personalIndex:1
   },
   getters: {
   },
@@ -22,6 +23,18 @@ export default new Vuex.Store({
       state.username=user.username,
       state.id=user.id
     },
+    toInfo(state) {
+      state.personalIndex=1
+    },
+    toFavor(state) {
+      state.personalIndex=2
+    },
+    toHistory(state) {
+      state.personalIndex=3
+    },
+    toMyPost(state) {
+      state.personalIndex=4
+    }
   },
   actions: {
   },
