@@ -2,7 +2,7 @@
   <el-container id="search">
     <el-header>
     <div class="wrap">
-<el-input v-model="input" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
+<el-input v-model="input1" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
 <template slot="append"><el-button type="primary" icon="el-icon-search">搜索</el-button></template>
 </el-input>
 </div>
@@ -35,7 +35,7 @@ export default {
   name: "main",
   data() {
     return {
-        input:'',
+        input1:'',
          posts: [
         {
             "id": 3,
@@ -77,9 +77,7 @@ export default {
                 this.$router.push('/Login');
         }
         else{
-            this.$store.dispatch('sear', {
-              inp:this.input
-            });
+            this.$store.state.input=this.input1;
             this.$router.push('/search');
         }
     }

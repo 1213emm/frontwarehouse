@@ -62,12 +62,9 @@ export default {
           case 0:
             this.$message.success("登录成功！");
             /* 将后端返回的 user 信息使用 vuex 存储起来 */
-            this.$store.dispatch('saveUser', {
-              user: {
-                'username': res.data.username,
-                'Id': this.form.id
-              }
-            });
+            this.$store.state.id=res.data.id;
+            this.$store.state.username=res.data.username;
+            this.$store.commit('login');
             /* 从 localStorage 中读取 preRoute 键对应的值 */
             const history_pth = localStorage.getItem('preRoute');
             /* 若保存的路由为空或为注册路由，则跳转首页；否则跳转前路由（setTimeout表示1000ms后执行） */

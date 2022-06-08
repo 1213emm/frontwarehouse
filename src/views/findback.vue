@@ -3,8 +3,8 @@
     <div class="wrap">
       <h1>找回密码</h1>
       <el-form :model="form" ref="form" class="form">
-        <el-form-item>
-          <el-input placeholder="学号" v-model="form.id" autocomplete="off"></el-input>
+        <el-form-item prop="username">
+          <el-input placeholder="学号" type="username"  v-model="form.id" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
           <el-input
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       form: {
-        id: 1,
+        id: '',
         security_issue:'密保问题',
         security_answer:'',
       }
@@ -49,7 +49,7 @@ export default {
         method: 'get',
         url: '/api/user/issue/',
          data: qs.stringify({
-           id:this.form.id
+           id: this.form.id
          })
       })
       .then(res =>{

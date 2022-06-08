@@ -167,7 +167,7 @@ export default {
       this.personalIndex=4;
     },
     toDetail(val) { 
-      this.$store.dispatch('getpostid',val);
+      this.$store.state.postid=val;
       this.$router.push("/detail");
     },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/
     tode1(val2){
@@ -226,7 +226,7 @@ export default {
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-          id: val4,
+          pid: val4,
         })
         })
         .then((res) => {
@@ -234,11 +234,11 @@ export default {
             case 0:
               this.$message.success("删除历史记录成功");
               break;
-            case 110002:
-              this.$message.error("帖子ID不能为空");
+            case 10002:
+              this.$message.error("帖子不存在");
               break;
-            case 110005:
-              this.$message.error("帖子未收藏");
+            case 10003:
+              this.$message.error("历史记录不存在");
               break;
           }
         })
