@@ -16,9 +16,34 @@
         </el-menu>
       </div>
       <div id="favorTable" v-if="personalIndex===2">
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="favorData" style="width: 100%">
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="name" label="作者"></el-table-column>
+          <el-table-column prop="date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="postid" >
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div id="historyTable" v-if="personalIndex===3">
+        <el-table :data="historyData" style="width: 100%">
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="name" label="作者"></el-table-column>
+          <el-table-column prop="date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="postid" >
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div id="myPostTable" v-if="personalIndex===4">
+        <el-table :data="myPostData" style="width: 100%">
+          <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="postid" >
@@ -38,18 +63,50 @@ export default {
     return {
       input: "",
       personalIndex:1, //根据该值个人空间显示不同的页面
-      tableData: [
+      favorData: [
         {
           date: "2016-05-02",
           name: "王小虎",
-          title: "上海市普陀区金沙江路 1518 弄",
+          title: "收藏1",
           likes: 10,
           postid: 11
         },
         {
           date: "2016-05-04",
           name: "王小",
-          title: "期末考试",
+          title: "收藏2",
+          likes: 15,
+          postid: 2
+        },
+      ],
+      historyData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          title: "历史1",
+          likes: 10,
+          postid: 11
+        },
+        {
+          date: "2016-05-04",
+          name: "王小",
+          title: "历史2",
+          likes: 15,
+          postid: 2
+        },
+      ],
+      myPostData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          title: "已发1",
+          likes: 10,
+          postid: 11
+        },
+        {
+          date: "2016-05-04",
+          name: "王小",
+          title: "已发2",
           likes: 15,
           postid: 2
         },
@@ -69,7 +126,7 @@ export default {
     toHistory: function(){
       this.personalIndex=3;
     },
-    toMypost: function(){
+    toMyPost: function(){
       this.personalIndex=4;
     },
     toDetail(val) { 
@@ -101,7 +158,7 @@ export default {
   text-align: center;
   line-height: 200px;
 }
-#favorTable{
+#favorTable,#historyTable,#myPostTable{
   margin-top: 20px;
 }
 </style>
