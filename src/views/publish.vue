@@ -27,7 +27,7 @@
         </div>
     </el-main>
     <el-footer >
-        <el-button type="primary" @click="personal" style="float: right">发布</el-button>
+        <el-button type="primary" @click="ppp" style="float: right">发布</el-button>
     </el-footer>
   </el-container>
 </template>
@@ -63,7 +63,7 @@ export default {
     personal: function(){
       this.$router.push('/');
     },
-    search: function(){
+    ppp: function(){
       if (!$store.state.islogin) {
         this.$router.push("/login");
       } else {
@@ -73,7 +73,8 @@ export default {
           data: qs.stringify({
             /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
             title:this.tit,
-            textarea:this.textarea
+            type:"课程推荐",
+            content:this.textarea
           }),
         }).then((res) => {
           switch (res.data.errno) {
