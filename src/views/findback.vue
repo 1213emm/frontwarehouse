@@ -48,9 +48,9 @@ export default {
       this.$axios({
         method: 'get',
         url: '/api/user/issue/',
-         data: qs.stringify({
+         params:{
            id: this.form.id
-         })
+         }
       })
       .then(res =>{
         switch (res.data.errno) {

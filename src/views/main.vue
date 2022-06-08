@@ -54,13 +54,17 @@ export default {
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/browse/',
-        data: qs.stringify({      
-        type:"最新"})       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        params:{   
+        type:"最新"
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
               this.posts=res.data.posts;
+
+
+              
               break;
             case 12001:
               this.$message.error("请求方式错误");
