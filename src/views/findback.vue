@@ -14,7 +14,7 @@
   :disabled="true"   :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" float="right" @click="show">显示密保问题</el-button>
+          <el-button type="primary" plain float="right" @click="show">显示密保问题</el-button>
         </el-form-item>
         <el-form-item prop="username">
           <el-input placeholder="密保答案" v-model="form.security_answer" autocomplete="off"></el-input>
@@ -101,10 +101,15 @@ export default {
 }
 </script>
 
+</script>
+
 <style scoped>
 #login {
   font-family: 'Noto Serif SC', serif;
-  margin-top: 20px;
+  background-color: rgb(246,246,246);
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 #login >>> .el-input__inner {
   font-family: 'Noto Serif SC', serif;
@@ -124,13 +129,14 @@ export default {
 }
 #login .wrap {
   width: 300px;
-  height: 315px;
+  height: 400px;
   padding: 0 25px 0 25px;
   line-height: 40px;
   position: relative;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin-top: 100px;
 }
 #login .btn_login {
   margin-top: 25px;
