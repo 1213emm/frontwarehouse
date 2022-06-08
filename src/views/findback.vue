@@ -3,15 +3,14 @@
     <div class="wrap">
       <h1>找回密码</h1>
       <el-form :model="form" ref="form" class="form">
-        <el-form-item prop="username">
+        <el-form-item>
           <el-input placeholder="学号" v-model="form.id" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="username">
+        <el-form-item>
           <el-input
           type="textarea"
-  :placeholder="form.security_issue"
-  v-model="input"
-  :disabled="true"   :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
+          :placeholder="form.security_issue"
+          :disabled="true"   :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain float="right" @click="show">显示密保问题</el-button>
@@ -34,7 +33,7 @@ export default {
   data() {
     return {
       form: {
-        id: '',
+        id: 1,
         security_issue:'密保问题',
         security_answer:'',
       }
@@ -43,7 +42,7 @@ export default {
   methods: {
       show: function(){
       if(this.form.id === ''){
-        this.message.warning("请输入学号");
+        this.$message.warning("请输入学号");
         return;
       }
       this.$axios({
@@ -70,7 +69,7 @@ export default {
     },
     get: function(){
       if(this.form.id === '' || this.form.security_answer === ''){
-        this.message.warning("请填写完整信息");
+        this.$message.warning("请填写完整信息");
       }
       this.$axios({
         method: 'post',           

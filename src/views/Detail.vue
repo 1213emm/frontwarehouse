@@ -17,45 +17,116 @@
           </el-card>
         </div>
         <div id="actions">
-          <el-button class="act" icon="el-icon-warning" type="danger" circle></el-button>
-          <el-button class="act" icon="el-icon-chat-line-round" type="info" circle></el-button>
-          <el-button class="act" icon="el-icon-star-off" type="warning" circle></el-button>
-          <el-button class="act" icon="el-icon-circle-check" type="primary" circle></el-button>
+          <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
+          <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
+          <!--根据是否已收藏返回不同图标-->
+          <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="isFavor">取消收藏</el-button>
+          <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" round v-else>加入收藏</el-button>
+          <!--根据是否已点赞返回不同图标-->
+          <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="isLike">取消点赞</el-button>
+          <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
+        </div>
+        <div id="addComment" v-if="addComment">
+          <el-input placeholder="你的想法" v-model="input" clearable>
+            <el-button type="primary" icon="el-icon-s-promotion" slot="append" @click="finish">发送</el-button>
+          </el-input>
         </div>
         <div id="comments">
-          <div class="floor">
+          <div class="floor" v-for="item in commentsList" :key="item.floor">
             <div class="speaker">
-              <span style="float:left;margin-top:10px">F2:</span>
-              <span style="float:left;margin-top:10px">评论人</span>
-              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle></el-button>
-              <el-button class="act1" icon="el-icon-warning" type="danger" circle></el-button>
+              <span style="float:left;margin-top:10px">F{{item.floor}}:</span>
+              <span style="float:left;margin-top:10px">{{item.speaker}}</span>
+              <!--根据是否已点赞返回不同图标-->
+              <el-button class="act1" icon="el-icon-success" type="primary" circle @click="unlike1(item.floor)" v-if="item.isLike1"></el-button>
+              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle @click="like1(item.floor)" v-else></el-button>
+              <el-button class="act1" icon="el-icon-warning" type="danger" circle @click="report1(item.floor)"></el-button>
             </div>
-            <div class="say"><el-card>你好</el-card></div>
-          </div>
-          <div class="floor">
-            <div class="speaker">
-              <span style="float:left;margin-top:10px">F3:</span>
-              <span style="float:left;margin-top:10px">评论人</span>
-              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle></el-button>
-              <el-button class="act1" icon="el-icon-warning" type="danger" circle></el-button>
-            </div>
-            <div class="say"><el-card>你好啊红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或</el-card></div>
+            <div class="say"><el-card>{{item.text}}</el-card></div>
           </div>
         </div>
     </el-main>
   </el-container>
 </template>
 
-<!--
-<style>
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
+<script>
+import qs from "qs";
+export default{
+  data(){
+    return{
+      input:"",
+      isFavor:false,
+      isLike:false,
+      addComment:false,
+       posts: [
+        {
+            "id": 3,
+            "user": "朱姜逸扬",
+            "type": "课程推荐",
+            "post_date": "2022-06-06T18:14:21.709Z",
+            "title": "关注嘉然今天吃什么",
+            "likes": 0,
+            "available_level": 0,
+            "resource": null,
+            "floor_num": 2
+        }],
+      commentsList:[{
+        floor:2,
+        speaker:"",
+        text:"",
+        isLike1:false,
+        commit_id,
+    }]
+    }
+  },
+  methods:{
+    personal: function(){
+      this.$router.push('/personal');
+    },
+    returnSearch: function(){
+      this.$router.push('/search');
+    },
+    report: function(){
+      //交互
+    },//举报帖子
+    favor: function(){
+      this.isFavor=true;
+      //交互
+    },//收藏
+    unfavor: function(){
+      this.isFavor=false;
+      //交互
+    },//取消收藏
+    like: function(){
+      this.isLike=true;
+      //交互
+    },//点赞帖子
+    unlike: function(){
+      this.isLike=false;
+      //交互
+    },//取消点赞帖子
+    comment: function(){
+      this.addComment=true;
+      //交互
+    },//评论帖子
+    finish: function(){
+      this.addComment=false;
+      //交互
+      window.scrollTo(0, document.body.scrollHeight);//跳转到页面底部，方便查看自己的评论
+    },//发送评论
+    like1(val){
+      this.commentsList[val-2].isLike1=true;
+      //交互
+    },//点赞评论，val为楼层编号，2楼即为commentsList[0]，所以减2，然后修改该评论的点赞状态，按钮样式随之改变
+    unlike1(val){
+      this.commentsList[val-2].isLike1=false;
+      //交互
+    },//取消点赞评论
+    report1(val){
+      //交互
+    },//举报评论，val为楼层编号
+  }
 }
-</style>
--->
+</script>
 
 <style scoped>
 #detail {
@@ -73,7 +144,6 @@
   color: #333;
   text-align: center;
 }
-
 #top {
   height:60px;
 }
@@ -87,23 +157,17 @@
   margin-left: 20px;
   margin-top: 10px;
 }
-
-#post {
-}
 #title {
   font-size: 200%;
 }
-
 #actions {
   padding-top: 10px;
   height: 46.2px
 }
 .act {
   float: right;
-  font-size :120%;
   margin-left: 20px;
 }
-
 #comments {
 }
 .floor {
@@ -122,17 +186,7 @@
   float: left;
   margin-left: 10px;
 }
-</style>
-
-<script>
-export default{
-  methods:{
-    personal: function(){
-      this.$router.push('/');
-    },
-    returnSearch: function(){
-      this.$router.push('/search');
-    },
-  }
+#addComment {
+  margin-top:30px
 }
-</script>
+</style>

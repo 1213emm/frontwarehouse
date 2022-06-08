@@ -20,7 +20,7 @@
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column>
             <template slot-scope="scope">
-<el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
+<el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -95,6 +95,7 @@ export default {
       }
     },
     toDetail(val) { 
+      this.$store.dispatch('getpostid',val);
         this.$router.push("/detail");    
     },
   }
