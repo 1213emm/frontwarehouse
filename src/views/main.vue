@@ -62,9 +62,6 @@ export default {
           switch (res.data.errno) {
             case 0:
               this.posts=res.data.posts;
-
-
-              
               break;
             case 12001:
               this.$message.error("请求方式错误");
