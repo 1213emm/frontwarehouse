@@ -68,7 +68,6 @@ export default {
                 'Id': this.form.id
               }
             });
-
             /* 从 localStorage 中读取 preRoute 键对应的值 */
             const history_pth = localStorage.getItem('preRoute');
             /* 若保存的路由为空或为注册路由，则跳转首页；否则跳转前路由（setTimeout表示1000ms后执行） */
@@ -85,7 +84,7 @@ export default {
             this.$message.error("用户名不存在!");
             break;
           case 2002:
-            this.$message.error("密码错误！");
+            this.$message.error("密码错误!");
             break;
         }
       })
@@ -100,6 +99,7 @@ export default {
     tofind: function (){
       this.$router.push('/findback');
     },
+    
   }
 }
 </script>

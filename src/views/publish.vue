@@ -51,6 +51,7 @@
 </style>
 
 <script>
+import qs from "qs";
 export default {
       data() {
           return{
@@ -64,11 +65,11 @@ export default {
     },
     search: function(){
       if (!$store.state.islogin) {
-        this.$router.push("/new");
+        this.$router.push("/login");
       } else {
         this.$axios({
           method: "post" /* 指明请求方式，可以是 get 或 post */,
-          url: "/publish" /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */,
+          url: "/api/pst/new/" /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */,
           data: qs.stringify({
             /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
             title:this.tit,
@@ -77,7 +78,10 @@ export default {
         }).then((res) => {
           switch (res.data.errno) {
             case 0:
-            
+              this.$message.success("发布成功");
+              break;
+            case 6002:
+              this.$message.error("用户未登陆");
               break;
             case 6003:
               this.$message.error("标题不能为空");
@@ -85,6 +89,12 @@ export default {
             case 6004:
               this.$message.error("类型不能为空");
              break;
+            case 6005:
+              this.$message.error("内容不能为空");
+              break;
+            case 6006:
+              this.$message.error("权限等级不能高于用户等级");
+              break;
           }
         });
       }
