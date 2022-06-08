@@ -136,6 +136,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
   margin-top: 100px;
+  box-shadow: darkgrey 1px 1px 1px 1px;
 }
 #login .btn_login {
   margin-top: 25px;

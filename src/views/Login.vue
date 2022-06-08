@@ -107,7 +107,10 @@ export default {
 <style scoped>
 #login {
   font-family: 'Noto Serif SC', serif;
-  margin-top: 60px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(246, 246, 246);
 }
 #login >>> .el-input__inner {
   font-family: 'Noto Serif SC', serif;
@@ -134,6 +137,8 @@ export default {
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin-top: 150px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
 }
 #login .btn_login {
   margin-top: 25px;
@@ -150,13 +155,13 @@ export default {
   line-height:10px;
   color:#999;
   cursor: pointer;
-  float:right;
+  float:left;
 }
 #login .suff {
   font-size:14px;
   line-height:10px;
   color:#999;
   cursor: pointer;
-  float:left;
+  float:right;
 }
 </style>

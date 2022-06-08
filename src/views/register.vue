@@ -96,7 +96,10 @@ export default {
 <style scoped>
 #login {
   font-family: 'Noto Serif SC', serif;
-  margin-top: 20px;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(246, 246, 246);
 }
 #login >>> .el-input__inner {
   font-family: 'Noto Serif SC', serif;
@@ -115,14 +118,16 @@ export default {
   backface-visibility: hidden;
 }
 #login .wrap {
-  width: 300px;
-  height: 315px;
+  width: 350px;
+  height: auto;
   padding: 0 25px 0 25px;
   line-height: 40px;
   position: relative;
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin-top: 50px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
 }
 #login .btn_login {
   margin-top: 25px;
