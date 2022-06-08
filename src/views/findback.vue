@@ -83,7 +83,7 @@ export default {
       .then(res => {
           switch (res.data.errno) {
           case 0:
-            this.$message.success("密码为"+res.data.password);
+            this.$message.success("密码为:"+res.data.password);
             setTimeout(() => {
                 this.$router.push('/Login');
             }, 1000);

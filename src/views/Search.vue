@@ -12,11 +12,11 @@
         <h3 style="float: left">查找如下：</h3>
       </div>
       <div>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="posts" style="width: 100%">
           <el-table-column type="index"> </el-table-column>
           <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="name" label="作者"></el-table-column>
-          <el-table-column prop="date" label="日期"></el-table-column>
+          <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column>
             <template slot-scope="scope">
@@ -35,35 +35,60 @@ export default {
   data() {
     return {
       input: "",
-      tableData: [
+      posts: [
         {
-          date: "",
-          name: "",
-          title: "",
-          likes:"",
-          postid:1,
-        }
-      ],
+            "id": 3,
+            "user": "朱姜逸扬",
+            "type": "课程推荐",
+            "post_date": "2022-06-06T18:14:21.709Z",
+            "title": "关注嘉然今天吃什么",
+            "likes": 0,
+            "available_level": 0,
+            "resource": null,
+            "floor_num": 2
+        }]
     };
+  },
+  created(){
+      this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/search/',
+        data: qs.stringify({      
+        keyword:$store.state.input})       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts=res.data.posts;
+              break;
+            case 8001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        });
   },
   methods:{
     search: function(){
       if (!$store.state.islogin) {
         this.$router.push("/Login");
       } else {
+         this.$store.dispatch('sear', {
+              inp:this.input
+        });
         this.$axios({
           method: "post" /* 指明请求方式，可以是 get 或 post */,
-          url: "/info" /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */,
+          url: "/api/post/search/" /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */,
           data: qs.stringify({
             /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-            input: this.input,
+            keyword: this.input,
           }),
         }).then((res) => {
           switch (res.data.errno) {
             case 0:
+              this.posts=res.data.posts;
               break;
-            case 100:
-              this.$message.error("无相关内容");
+            case 8003:
+              this.$message.error("搜索关键字不能为空");
               break;
           }
         });
@@ -71,7 +96,7 @@ export default {
     },
     toDetail(val) { 
         this.$router.push("/detail");    
-    },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/ 
+    },
   }
 };
 </script>
