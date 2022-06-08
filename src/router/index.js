@@ -39,7 +39,15 @@ const routes = [
     path: '/publish',
     name: 'detail',
     component: () => import( '../views/publish.vue')
-  }
+  },{
+    path: '/user',
+    name: 'user',
+    component: () => import( '../views/userSpace.vue')
+  },{
+    path: '/findback',
+    name: 'findback',
+    component: () => import( '../views/findback.vue')
+  },
 ]
 
 const router = new VueRouter({

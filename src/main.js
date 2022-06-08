@@ -8,9 +8,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 import Axios from 'axios';//后台交互
-Vue.prototype.$http=Axios
+Vue.prototype.$axios=Axios
 //defaults 设置全局默认路径
-Axios.defaults.baseURL="api/user/"
+Axios.defaults.baseURL="http://localhost:8000"
 
 Vue.config.productionTip = false
 

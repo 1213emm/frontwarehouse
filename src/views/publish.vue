@@ -79,9 +79,12 @@ export default {
             case 0:
             
               break;
-            case 100:
-              this.$message.error("无相关内容");
+            case 6003:
+              this.$message.error("标题不能为空");
               break;
+            case 6004:
+              this.$message.error("类型不能为空");
+             break;
           }
         });
       }

@@ -1,35 +1,26 @@
 <template>
   <div id="login" class="login">
     <div class="wrap">
-      <h1>注 册</h1>
+      <h1>找回密码</h1>
       <el-form :model="form" ref="form" class="form">
         <el-form-item prop="username">
           <el-input placeholder="学号" v-model="form.id" autocomplete="off"></el-input>
         </el-form-item>
-         <el-form-item prop="username">
-          <el-input placeholder="用户名" v-model="form.username" autocomplete="off"></el-input>
-        </el-form-item>
         <el-form-item prop="username">
-          <el-input placeholder="密保问题" v-model="form.security_issue" autocomplete="off"></el-input>
+          <el-input
+          type="textarea"
+  :placeholder="form.security_issue"
+  v-model="input"
+  :disabled="true"   :autosize="{ minRows: 2, maxRows: 4}" ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" float="right" @click="show">显示密保问题</el-button>
         </el-form-item>
         <el-form-item prop="username">
           <el-input placeholder="密保答案" v-model="form.security_answer" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item prop="username">
-          <el-input placeholder="密码" v-model="form.password1" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item id="password" prop="password">
-          <el-input
-              placeholder="确认密码"
-              show-password
-              type="password"
-              v-model="form.password2"
-              autocomplete="off"
-              @keyup.enter.native="login"
-          ></el-input>
-        </el-form-item>
         <el-form-item class="btn_login">
-          <el-button type="primary" @click="register">注&nbsp;&nbsp;册</el-button>
+          <el-button type="primary" @click="get">找回密码</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -44,52 +35,69 @@ export default {
     return {
       form: {
         id: '',
-        username: '',
-        security_issue:'',
-        security_answer:''
+        security_issue:'密保问题',
+        security_answer:'',
       }
     }
   },
   methods: {
-    register: function () {
-      // 检查表单是否有填写内容
-      if (this.form.id === '' || this.form.password1 === ''|| this.form.password2 === '' || this.form.username === '' || this.form.security_issue === '' || this.form.security_answer === '') {
-        this.$message.warning("请填写完整信息!");
+      show: function(){
+      if(this.form.id === ''){
+        this.message.warning("请输入学号");
         return;
       }
       this.$axios({
+        method: 'get',
+        url: '/api/user/issue/',
+         data: qs.stringify({
+           id:this.form.id
+         })
+      })
+      .then(res =>{
+        switch (res.data.errno) {
+          case 0:
+            this.form.security_issue=res.data.security_issue
+            break;
+          case 4002:
+            this.$message.error("该用户不存在!");
+            break;
+        }
+      }
+      )
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      })
+    },
+    get: function(){
+      if(this.form.id === '' || this.form.security_answer === ''){
+        this.message.warning("请填写完整信息");
+      }
+      this.$axios({
         method: 'post',           
-        url: '/api/user/register/',       
+        url: '/api/user/password/',       
         data: qs.stringify({      
           id: this.form.id,
-          username: this.form.username,
-          password_1: this.form.password1,
-          password_2: this.form.password2,
-          security_issue: this.form.security_issue,
           security_answer: this.form.security_answer
         })
       })
-      .then(res => {              /* res 是 response 的缩写 */
-        switch (res.data.errno) {
+      .then(res => {
+          switch (res.data.errno) {
           case 0:
-            this.$message.success("注册成功！");
+            this.$message.success("密码为"+res.data.password);
             setTimeout(() => {
                 this.$router.push('/Login');
             }, 1000);
             break;
-          case 1002:
-            this.$message.error("该学号已被注册!");
-            break;
-          case 1003:
-            this.$message.error("两次输入的密码不相同!");
+          case 5002:
+            this.$message.error("答案错误!");
             break;
         }
       })
       .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

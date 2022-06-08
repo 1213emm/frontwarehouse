@@ -23,6 +23,9 @@
       <div class="suffix">
         <p @click="toRegister">注册帐号</p>
       </div>
+      <div class="suff">
+        <p @click="tofind">找回密码</p>
+      </div>
     </div>
   </div>
 </template>
@@ -48,7 +51,7 @@ export default {
       }
       this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
-        url: '/login',       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        url: '/api/user/login/',       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           id: this.form.id,
           password: this.form.password
@@ -93,7 +96,10 @@ export default {
     toRegister: function () {
       // 跳转注册的路由
       this.$router.push('/register');
-    }
+    },
+    tofind: function (){
+      this.$router.push('/findback');
+    },
   }
 }
 </script>
@@ -145,5 +151,12 @@ export default {
   color:#999;
   cursor: pointer;
   float:right;
+}
+#login .suff {
+  font-size:14px;
+  line-height:10px;
+  color:#999;
+  cursor: pointer;
+  float:left;
 }
 </style>

@@ -20,7 +20,7 @@
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column>
             <template slot-scope="scope">
-              <el-link type="primary" @click="seeblog(scope.id)">查看详情（未完成）</el-link>
+<el-link type="primary" @click="toDetail(scope.row.postid)">查看详情</el-link>
             </template>
           </el-table-column>
         </el-table>
@@ -41,6 +41,7 @@ export default {
           name: "",
           title: "",
           likes:"",
+          postid:1,
         }
       ],
     };
@@ -67,7 +68,10 @@ export default {
           }
         });
       }
-    }
+    },
+    toDetail(val) { 
+        this.$router.push("/detail");    
+    },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/ 
   }
 };
 </script>
