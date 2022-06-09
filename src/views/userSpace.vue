@@ -905,6 +905,14 @@ export default {
         .then((res) => {
           switch (res.data.errno) {
             case 0:
+            this.username=this.input2,
+            this.description=this.input3,
+            this.grade=this.input4,
+            this.major=this.input5,
+            this.sex=this.input6,
+            this.security_issue=this.input7,
+            this.security_answer=this.input8,
+            this.password=this.input9
               this.$message.success("保存成功");
               break;
           }

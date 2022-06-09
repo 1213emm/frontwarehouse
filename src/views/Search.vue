@@ -7,6 +7,13 @@
 </el-input>
 </div>
     </el-header>
+        <el-header>
+        <div type="top">
+        <span style="float:left">
+            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
+        </span>
+        </div>
+    </el-header>
     <el-main id="main">
       <div>
         <h3 style="float: left">查找如下：</h3>
@@ -55,7 +62,7 @@ export default {
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/search/',
         params:{      
-        keyword:$store.state.input}       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        keyword:this.$store.state.input}       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
         .then((res) => {
           switch (res.data.errno) {
@@ -69,6 +76,9 @@ export default {
         });
   },
   methods:{
+    returnd: function(){
+        this.$router.push("/");
+    },
     search: function(){
       if (this.$session.get("id")==0) {
         this.$message.error("请登录");
