@@ -1,6 +1,13 @@
 <template>
   <div id="contaner">
     <div id="personal">
+      <el-header>
+        <div type="top">
+        <span style="float:left">
+            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
+        </span>
+        </div>
+      </el-header>
       <el-main id="main">
         <div>
           <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
@@ -71,8 +78,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope1">
-                <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>&nbsp
-                <el-link type="primary" @click="tode2(scope1.row.id)">取消收藏</el-link>
+                <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -86,8 +93,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope2">
-                <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>&nbsp
-                <el-link type="primary" @click="tode1(scope2.row.id)">删除帖子</el-link>
+                <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode1(scope2.row.id)">删除帖子</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -101,8 +108,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope3">
-                <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>&nbsp
-                <el-link type="primary" @click="tode3(scope3.row.id)">删除记录</el-link>
+                <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode3(scope3.row.id)">删除历史记录</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -112,19 +119,19 @@
             <h1>待更改</h1>
             <el-table-column prop="title" label="标题"></el-table-column>
             <el-table-column prop="user" label="作者"></el-table-column>
-            <el-table-column prop="userid" label="学号"></el-table-column>
+            <el-table-column prop="user_id" label="学号"></el-table-column>
             <el-table-column prop="type" label="类型"></el-table-column>
             <el-table-column prop="post_date" label="日期"></el-table-column>
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope4">
-                <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>&nbsp
-                <el-link type="primary" @click="tode4(scope4.row.id)">删除帖子</el-link>
+                <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
               </template>
             </el-table-column>
             <el-table-column prop="user_id" >
               <template slot-scope="scope4">
-                <el-link type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-link>
+                <el-button type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -145,6 +152,8 @@
   </div>
 </template>
 
+/script>
+
 <style scoped>
 #contaner{
   position: absolute;
@@ -154,10 +163,10 @@
 }
 #personal {
   font-family: 'Noto Serif SC', serif;
-  width: 1400px;
   margin: 0 auto;
   margin-top: 20px;
-  box-shadow: darkgrey 1px 1px 1px 1px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  width: 1200px;
 }
 #head {
   background-color: #d4e7d9;
@@ -176,10 +185,12 @@
   text-align: center;
   line-height: 200px;
 }
-#favorTable{
+#favorTable,#reported,#unban{
   margin-top: 20px;
 }
 </style>
+
+
 
 <script>
 import qs from "qs";
@@ -209,72 +220,72 @@ export default {
       personalIndex:1, //根据该值个人空间显示不同的页面
       posts1: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "关注嘉然今天吃什么",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "课程推荐",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "关注嘉然今天吃什么",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        posts2: [
+      posts2: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "关注嘉然今天吃什么",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "课程推荐",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "关注嘉然今天吃什么",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        posts3: [
+      posts3: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "关注嘉然今天吃什么",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "课程推荐",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "关注嘉然今天吃什么",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        posts4:[
+      posts4:[
         {
-            "id": 3,
-            "user": "被举报了",
-            "user_id":"",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "关注嘉然今天吃什么",
-            "likes": 0,
-            "report_times": 2,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "被举报了",
+          "user_id":"",
+          "type": "课程推荐",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "关注嘉然今天吃什么",
+          "likes": 0,
+          "report_times": 2,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
       users: [
         {
-            "id": 20373615,
-            "username": "朱姜逸扬",
-            "description": "",
-            "grade": 2,
-            "major": "软件工程",
-            "sex": true,
-            "headshot": "/media/user_20373615/headshot/headshot.jpg"
+          "id": 20373615,
+          "username": "朱姜逸扬",
+          "description": "",
+          "grade": 2,
+          "major": "软件工程",
+          "sex": true,
+          "headshot": "/media/user_20373615/headshot/headshot.jpg"
         }
-    ]
+      ]
     };
   },
   created(){
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno){
             case 0:
@@ -283,12 +294,12 @@ export default {
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno){
             case 0:
@@ -300,16 +311,17 @@ export default {
               this.security_issue=res.data.data.security_issue;
               this.security_answer=res.data.data.security_answer;
               this.password=res.data.data.password;
+              this.headshot=res.data.data.headshot;
               break;
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-     this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno){
             case 0:
@@ -321,12 +333,12 @@ export default {
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
     this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -338,12 +350,12 @@ export default {
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -355,12 +367,12 @@ export default {
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/report/'   /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/report/'   /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -379,8 +391,8 @@ export default {
           }
         })
         .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      }); 
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
   },
   methods:{
     toInfo: function(){
@@ -405,545 +417,545 @@ export default {
       this.$router.back();
     },
     ban(valv){
-        this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/ban/',
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           user_id: valv,
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.post=res.data.post;
-              this.comments=res.data.comments;
-              this.$message.success("禁言成功");
-              break;
-            case 16001:
-              this.$message.error("用户未登陆");
-              break;
-            case 16002:
-              this.$message.error("非管理员用户不能禁言用户");
-              break;
-            case 16003:
-              this.$message.error("用户ID不能为空");
-              break;
-            case 16004:
-              this.$message.error("用户不存在");
-              break;
-          }
-        })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.post=res.data.post;
+                this.comments=res.data.comments;
+                this.$message.success("禁言成功");
+                break;
+              case 16001:
+                this.$message.error("用户未登陆");
+                break;
+              case 16002:
+                this.$message.error("非管理员用户不能禁言用户");
+                break;
+              case 16003:
+                this.$message.error("用户ID不能为空");
+                break;
+              case 16004:
+                this.$message.error("用户不存在");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.users=res.data.users;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.users=res.data.users;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
-     unban(valu){
-        this.$axios({
+    unban(valu){
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/ban/',
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           user_id: valu,
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.post=res.data.post;
-              this.comments=res.data.comments;
-              this.$message.success("解除禁言成功");
-              break;
-            case 16001:
-              this.$message.error("用户未登陆");
-              break;
-            case 16002:
-              this.$message.error("非管理员用户不能禁言用户");
-              break;
-            case 16003:
-              this.$message.error("用户ID不能为空");
-              break;
-            case 16004:
-              this.$message.error("用户不存在");
-              break;
-          }
-        })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.post=res.data.post;
+                this.comments=res.data.comments;
+                this.$message.success("解除禁言成功");
+                break;
+              case 16001:
+                this.$message.error("用户未登陆");
+                break;
+              case 16002:
+                this.$message.error("非管理员用户不能禁言用户");
+                break;
+              case 16003:
+                this.$message.error("用户ID不能为空");
+                break;
+              case 16004:
+                this.$message.error("用户不存在");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.users=res.data.users;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.users=res.data.users;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
-    toDetail(val) { 
+    toDetail(val) {
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/comment/',
-        params:{   
-        post_id:val
+        params:{
+          post_id:val
         }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$store.state.postid=val;
-              this.$router.push("/detail");
-              break;
-            case 12001:
-              this.$message.error("请求方式错误");
-              break;
-          }
-        })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.$store.state.postid=val;
+                this.$router.push("/detail");
+                break;
+              case 12001:
+                this.$message.error("请求方式错误");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/
     tode1(val2){
-       this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           post_id: val2,
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$message.success("删帖成功");
-              break;
-            case 14003:
-              this.$message.error("帖子ID不能为空");
-              break;
-            case 14004:
-              this.$message.error("帖子不存在");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.$message.success("删帖成功");
+                break;
+              case 14003:
+                this.$message.error("帖子ID不能为空");
+                break;
+              case 14004:
+                this.$message.error("帖子不存在");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.username=res.data.data.username;
-              this.description=res.data.data.description;
-              this.major=res.data.data.major;
-              this.sex=res.data.data.sex;
-              this.level=res.data.data.level;
-              this.security_issue=res.data.data.security_issue;
-              this.security_answer=res.data.data.security_answer;
-              this.password=res.data.data.password;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-     this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.username=res.data.data.username;
+                this.description=res.data.data.description;
+                this.major=res.data.data.major;
+                this.sex=res.data.data.sex;
+                this.level=res.data.data.level;
+                this.security_issue=res.data.data.security_issue;
+                this.security_answer=res.data.data.security_answer;
+                this.password=res.data.data.password;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.posts1=res.data.posts;
-              break;
-            case 9001:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-    this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.posts1=res.data.posts;
+                break;
+              case 9001:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts2=res.data.posts;
-              break;
-            case 10002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts2=res.data.posts;
+                break;
+              case 10002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts3=res.data.posts;
-              break;
-            case 11002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts3=res.data.posts;
+                break;
+              case 11002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
     tode2(val3){
-        this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           post_id: val3,
           op:1
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$message.success("移除成功");
-              break;
-            case 11002:
-              this.$message.error("帖子ID不能为空");
-              break;
-            case 11005:
-              this.$message.error("帖子未收藏");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.$message.success("移除成功");
+                break;
+              case 11002:
+                this.$message.error("帖子ID不能为空");
+                break;
+              case 11005:
+                this.$message.error("帖子未收藏");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.username=res.data.data.username;
-              this.description=res.data.data.description;
-              this.major=res.data.data.major;
-              this.sex=res.data.data.sex;
-              this.level=res.data.data.level;
-              this.security_issue=res.data.data.security_issue;
-              this.security_answer=res.data.data.security_answer;
-              this.password=res.data.data.password;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-     this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.username=res.data.data.username;
+                this.description=res.data.data.description;
+                this.major=res.data.data.major;
+                this.sex=res.data.data.sex;
+                this.level=res.data.data.level;
+                this.security_issue=res.data.data.security_issue;
+                this.security_answer=res.data.data.security_answer;
+                this.password=res.data.data.password;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.posts1=res.data.posts;
-              break;
-            case 9001:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-    this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.posts1=res.data.posts;
+                break;
+              case 9001:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts2=res.data.posts;
-              break;
-            case 10002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts2=res.data.posts;
+                break;
+              case 10002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts3=res.data.posts;
-              break;
-            case 11002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts3=res.data.posts;
+                break;
+              case 11002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
     tode3(val4){
-        this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           post_id: val4,
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$message.success("删除历史记录成功");
-              break;
-            case 10002:
-              this.$message.error("帖子不存在");
-              break;
-            case 10003:
-              this.$message.error("历史记录不存在");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-              this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.$message.success("删除历史记录成功");
+                break;
+              case 10002:
+                this.$message.error("帖子不存在");
+                break;
+              case 10003:
+                this.$message.error("历史记录不存在");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.username=res.data.data.username;
-              this.description=res.data.data.description;
-              this.major=res.data.data.major;
-              this.sex=res.data.data.sex;
-              this.level=res.data.data.level;
-              this.security_issue=res.data.data.security_issue;
-              this.security_answer=res.data.data.security_answer;
-              this.password=res.data.data.password;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-     this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.username=res.data.data.username;
+                this.description=res.data.data.description;
+                this.major=res.data.data.major;
+                this.sex=res.data.data.sex;
+                this.level=res.data.data.level;
+                this.security_issue=res.data.data.security_issue;
+                this.security_answer=res.data.data.security_answer;
+                this.password=res.data.data.password;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.posts1=res.data.posts;
-              break;
-            case 9001:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-    this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.posts1=res.data.posts;
+                break;
+              case 9001:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts2=res.data.posts;
-              break;
-            case 10002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts2=res.data.posts;
+                break;
+              case 10002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts3=res.data.posts;
-              break;
-            case 11002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts3=res.data.posts;
+                break;
+              case 11002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
     tode4(val2){
-       this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           post_id: val2,
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$message.success("删帖成功");
-              break;
-            case 14003:
-              this.$message.error("帖子ID不能为空");
-              break;
-            case 14004:
-              this.$message.error("帖子不存在");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-              this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.$message.success("删帖成功");
+                break;
+              case 14003:
+                this.$message.error("帖子ID不能为空");
+                break;
+              case 14004:
+                this.$message.error("帖子不存在");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.username=res.data.data.username;
-              this.description=res.data.data.description;
-              this.major=res.data.data.major;
-              this.sex=res.data.data.sex;
-              this.level=res.data.data.level;
-              this.security_issue=res.data.data.security_issue;
-              this.security_answer=res.data.data.security_answer;
-              this.password=res.data.data.password;
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-     this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.username=res.data.data.username;
+                this.description=res.data.data.description;
+                this.major=res.data.data.major;
+                this.sex=res.data.data.sex;
+                this.level=res.data.data.level;
+                this.security_issue=res.data.data.security_issue;
+                this.security_answer=res.data.data.security_answer;
+                this.password=res.data.data.password;
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno){
-            case 0:
-              this.posts1=res.data.posts;
-              break;
-            case 9001:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-    this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno){
+              case 0:
+                this.posts1=res.data.posts;
+                break;
+              case 9001:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts2=res.data.posts;
-              break;
-            case 10002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts2=res.data.posts;
+                break;
+              case 10002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.posts3=res.data.posts;
-              break;
-            case 11002:
-              this.$message.error("用户未登陆");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.posts3=res.data.posts;
+                break;
+              case 11002:
+                this.$message.error("用户未登陆");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     },
     save: function(){
 
-        this.$axios({
+      this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-            username:this.input2,
-            description:this.input3,
-            grade:this.input4,
-            major:this.input5,
-            sex:this.input6,
-            security_issue:this.input7,
-            security_answer:this.input8,
-            password:this.input9
+          username:this.input2,
+          description:this.input3,
+          grade:this.input4,
+          major:this.input5,
+          sex:this.input6,
+          security_issue:this.input7,
+          security_answer:this.input8,
+          password:this.input9
         })
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-            this.username=this.input2,
-            this.description=this.input3,
-            this.grade=this.input4,
-            this.major=this.input5,
-            this.sex=this.input6,
-            this.security_issue=this.input7,
-            this.security_answer=this.input8,
-            this.password=this.input9
-              this.$message.success("保存成功");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
+      })
+          .then((res) => {
+            switch (res.data.errno) {
+              case 0:
+                this.username=this.input2,
+                    this.description=this.input3,
+                    this.grade=this.input4,
+                    this.major=this.input5,
+                    this.sex=this.input6,
+                    this.security_issue=this.input7,
+                    this.security_answer=this.input8,
+                    this.password=this.input9
+                this.$message.success("保存成功");
+                break;
+            }
+          })
+          .catch(err => {
+            console.log(err);         /* 若出现异常则在终端输出相关信息 */
+          });
     }
   }
 };
@@ -971,7 +983,7 @@ export default {
   text-align: center;
   line-height: 200px;
 }
-#favorTable{
+#favorTable,#reported,#unban{
   margin-top: 20px;
 }
 </style>

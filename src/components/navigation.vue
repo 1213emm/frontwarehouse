@@ -20,7 +20,7 @@ export default {
   name:"navigation",
   methods:{
     toUser(){
-      this.$router.push('/userSpace');
+      this.$router.push('/user');
       this.$message.success("进入用户空间！");
     },
     toMain(){
