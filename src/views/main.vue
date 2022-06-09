@@ -179,8 +179,10 @@ export default {
       },
     toDetail(val) { 
       this.$router.push("/detail");
+      this.$store.state.islogin=true;
     },//val为帖子id，交互时传到后端
     toTip: function(){
+      this.$store.state.islogin=true;
       this.mainIndex=1;
       //不用交互，显示本地新手教程
     },
