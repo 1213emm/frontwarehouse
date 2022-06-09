@@ -45,15 +45,15 @@ export default {
       input: "",
       posts: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "关注嘉然今天吃什么",
+            "id": 0,
+            "user": "",
+            "type": "",
+            "post_date": "",
+            "title": "",
             "likes": 0,
             "available_level": 0,
             "resource": null,
-            "floor_num": 2
+            "floor_num": 1
         }]
     };
   },
@@ -88,7 +88,7 @@ export default {
         this.$router.push("/");
     },
     search: function(){
-      if (this.$session.get("id")==0) {
+      if (!this.$store.state.islogin) {
         this.$message.error("请登录");
         this.$router.push("/Login");
       } else {

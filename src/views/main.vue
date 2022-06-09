@@ -229,7 +229,7 @@ export default {
   }, 
   methods: {
     search:function () {
-       if (this.$session.get("id")==0){
+       if (!this.$store.state.islogin){
                 this.$router.push('/Login');
         }
         else{
@@ -238,7 +238,7 @@ export default {
         }
       },
     toDetail(val) { 
-      if (this.$session.get("id")==0){
+      if (!this.$store.state.islogin){
             this.$message.error("用户未登陆");
             this.$router.push('/Login');
       }

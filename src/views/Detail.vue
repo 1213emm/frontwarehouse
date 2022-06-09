@@ -125,6 +125,7 @@ export default{
               break;
             case 7002:
               this.$message.error("用户未登陆");
+              this.$router.back();
               break;
             case 7006:
               this.$message.error("等级不够无法查看");
@@ -172,27 +173,6 @@ export default{
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });       
-      this.$axios({
-        method: 'post',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/user/favorites/',
-        data: qs.stringify({
-          post_id:this.$store.state.postid,
-          op:0
-        })     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-        .then((res) => {
-          switch (res.data.errno) {
-            case 0:
-              this.$message.success("收藏成功");
-              break;
-            case 11002:
-              this.$message.error("帖子ID不能为空");
-              break;
-          }
-        })
-        .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
       //交互
     },//举报帖子
     favor: function(){
@@ -218,6 +198,38 @@ export default{
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
       //交互
     },//收藏
     unfavor: function(){
@@ -241,6 +253,38 @@ export default{
           }
         })
         .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
       //交互
@@ -270,6 +314,38 @@ export default{
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
       //交互
     },//点赞帖子
     unlike: function(){
@@ -295,6 +371,38 @@ export default{
           }
         })
         .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
       //交互
@@ -379,6 +487,38 @@ export default{
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
       //交互
     },//点赞评论，val为楼层编号，2楼即为commentsList[0]，所以减2，然后修改该评论的点赞状态，按钮样式随之改变
     unlike1(val){
@@ -404,6 +544,38 @@ export default{
           }
         })
         .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+          this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 7001:
+              this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              this.$router.back();
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
+              break;
+          }
+        })
+      .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
       //交互
