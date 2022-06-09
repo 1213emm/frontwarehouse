@@ -1,24 +1,73 @@
 <template>
   <el-container id="personal">
     <el-main id="main">
+        <div>
+        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" v-if="level==100" @select="handleSelect" active-text-color="#ffd04b">
+          <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
+          <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
+          <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
+          <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
+          <el-menu-item @click="toReports" index="5"><i class="el-icon-warning"></i>被举报帖子</el-menu-item>
+        </el-menu>
+      </div>
       <div>
-        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect" active-text-color="#ffd04b">
+        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" v-if="level<100" @select="handleSelect" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
           <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
         </el-menu>
       </div>
+      <div id="infoTable" v-if="personalIndex===1">
+        <div>
+          <el-form ref="form" :model="form" label-width="80px">
+          <h1></h1>
+            <el-form-item label="用户名">
+              <el-input class="infoInput" :placeholder="username" v-model="input2"></el-input>
+            </el-form-item>
+            <el-form-item label="等级">
+              <el-input class="infoInput" :placeholder="level" v-model="input1" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="简介">
+              <el-input class="infoInput" :placeholder="description" v-model="input3"></el-input>
+            </el-form-item>
+            <el-form-item label="年级">
+              <el-input class="infoInput" :placeholder="grade" v-model="input4"></el-input>
+            </el-form-item>
+            <el-form-item label="专业">
+              <el-input class="infoInput" :placeholder="major" v-model="input5"></el-input>
+            </el-form-item>
+            <el-form-item label="性别">
+              <el-select class="infoInput" :placeholder="sex" v-model="input6">
+                <el-option label="男" value="男"></el-option>
+                <el-option label="女" value="女"></el-option>
+                <el-option label="秘密" value="秘密"></el-option>
+              </el-select>
+            </el-form-item>
+              <el-form-item label="密保问题">
+              <el-input class="infoInput" :placeholder="security_issue" v-model="input7"></el-input>
+            </el-form-item>
+              <el-form-item label="答案">
+              <el-input class="infoInput" :placeholder="security_answer" v-model="input8"></el-input>
+            </el-form-item>
+              <el-form-item label="密码">
+              <el-input class="infoInput" :placeholder="password" v-model="input9"></el-input>
+            </el-form-item>          
+          </el-form>
+          <el-button type="primary" id="editFinish" @click="save">保存个人信息</el-button>
+        </div>
+      </div>
       <div id="favorTable" v-if="personalIndex===2">
         <el-table :data="posts3" style="width: 100%">
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
             <template slot-scope="scope1">
-              <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode2(scope2.row.id)">取消收藏</el-button>
+              <el-link type="primary" @click="toDetail(cope1.row.id)">查看详情</el-link>
+              <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -27,6 +76,7 @@
         <el-table :data="posts1" style="width: 100%">
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
@@ -41,12 +91,28 @@
         <el-table :data="posts2" style="width: 100%">
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
+                    <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
             <template slot-scope="scope3">
               <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode3(scope2.row.id)">删除历史记录</el-button>
+              <el-button type="primary" @click="tode3(scope3.row.id)">删除历史记录</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+        <div id="favorTable" v-if="personalIndex===5">
+        <el-table :data="posts4" style="width: 100%">
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="user" label="作者"></el-table-column>
+                    <el-table-column prop="type" label="类型"></el-table-column>
+          <el-table-column prop="post_date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="id" >
+            <template slot-scope="scope4">
+              <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
+              <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -61,6 +127,25 @@ export default {
   data() {
     return {
       input: "",
+      username:"2",
+      description:"这个人很懒，啥也没写",
+      grade:"1",
+      major:"软件工程",
+      sex:"男",
+      level:100,
+      security_issue:"您吃了吗？",
+      security_answer:"没呢",
+      password:"dddd",
+      headshot:"",
+      input1: "",
+      input2: "",
+      input3: "",
+      input4: "",
+      input5: "",
+      input6: "",
+      input7:"",
+      input8:"",
+      input9:"",
       personalIndex:1, //根据该值个人空间显示不同的页面
       posts1: [
         {
@@ -97,12 +182,45 @@ export default {
             "available_level": 0,
             "resource": null,
             "floor_num": 2
+        }],
+        posts4: [
+        {
+            "id": 3,
+            "user": "被举报了",
+            "type": "课程推荐",
+            "post_date": "2022-06-06T18:14:21.709Z",
+            "title": "关注嘉然今天吃什么",
+            "likes": 0,
+            "available_level": 0,
+            "resource": null,
+            "floor_num": 2
         }]
     };
   },
   created(){
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.level;
+              this.username=res.data.username;
+              this.description=res.data.description;
+              this.major=res.data.major;
+              this.sex=res.data.sex;
+              this.security_issue=res.data.security_issue;
+              this.security_answer=res.data.security_answer;
+              this.password=res.data.password;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
      this.$axios({
-        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
         .then((res) => {
@@ -166,9 +284,36 @@ export default {
     toMyPost: function(){
       this.personalIndex=4;
     },
+    toReports: function(){
+      this.personalIndex=5;
+    },
     toDetail(val) { 
-      this.$store.state.postid=val;
-      this.$router.push("/detail");
+      this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:val
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              if(this.$store.state.level<res.data.post.available_level){
+                      this.$store.state.postid=val;
+                      this.$router.push("/detail");
+              }
+              else{
+                      this.$message.warning("未达到可查看等级");
+              }
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },/*新增表内属性postid，传入的val即为帖子编号，每一行不同，点击“查看详情”链接时进入详情页面，并将该参数发送到后端*/
     tode1(val2){
        this.$axios({
@@ -245,7 +390,32 @@ export default {
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       })
-    }
+    },
+    tode4(val2){
+       this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+          id: val2,
+        })
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.$message.success("删帖成功");
+              break;
+            case 140003:
+              this.$message.error("帖子ID不能为空");
+              break;
+            case 140004:
+              this.$message.error("帖子不存在");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      })
+    },
   }
 };
 </script>

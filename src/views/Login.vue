@@ -69,11 +69,7 @@ export default {
             const history_pth = localStorage.getItem('preRoute');
             /* 若保存的路由为空或为注册路由，则跳转首页；否则跳转前路由（setTimeout表示1000ms后执行） */
             setTimeout(() => {
-              if (history_pth == null || history_pth === '/register') {
                 this.$router.push('/');
-              } else {
-                this.$router.push({ path: history_pth });
-              }
             }, 1000);
             this.$store.commit('login');
             break;

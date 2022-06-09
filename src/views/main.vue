@@ -74,14 +74,43 @@ export default {
   }, 
   methods: {
       search:function () {
-       if (!$store.state.islogin){
+       if (this.$session.get("id")==0){
                 this.$router.push('/Login');
         }
         else{
             this.$store.state.input=this.input1;
             this.$router.push('/search');
         }
-    }
+    },
+    seeblog(val) { 
+      if (this.$session.get("id")==0){
+            this.$message.error("用户未登陆");
+            this.$router.push('/Login');
+        }
+      else{
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:val
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+       .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.$store.state.postid=val;
+               this.$router.push("/detail");   
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+         }
+    },
   }
 }
 </script>

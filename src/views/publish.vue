@@ -15,6 +15,32 @@
 </el-input>
             </div>
             <h1></h1>
+            <h1>模块：
+            <el-select class="types" placeholder="请选择板块" v-model="type">
+                <el-option label="课程推荐" value="课程推荐"></el-option>
+                <el-option label="刷题" value="刷题"></el-option>
+                <el-option label="校园周边" value="校园周边"></el-option>
+            </el-select>
+              屏蔽等级：
+                <el-select class="types" placeholder="屏蔽等级" v-model="available_level">
+                <el-option label=0 value=0></el-option>
+                <el-option label=1 value=1></el-option>
+                <el-option label=2 value=2></el-option>
+                <el-option label=3 value=3></el-option>
+                <el-option label=4 value=4></el-option>
+                <el-option label=5 value=5></el-option>
+                <el-option label=6 value=6></el-option>
+                <el-option label=7 value=7></el-option>
+                <el-option label=8 value=8></el-option>
+                <el-option label=9 value=9></el-option>
+                <el-option label=10 value=10></el-option>
+                <el-option label=11 value=11></el-option>     
+                <el-option label=12 value=12></el-option>
+                <el-option label=13 value=13></el-option>
+                <el-option label=14 value=14></el-option>
+                <el-option label=15 value=15></el-option>     
+            </el-select></h1>
+            <h1></h1>
 <el-input
   type="textarea"
   :autosize="{ minRows: 20, maxRows: 100}"
@@ -54,7 +80,9 @@ export default {
       data() {
           return{
               tit:"",
-              textarea:""
+              textarea:"",
+              type:"",
+              available_level:0,
           }
       }, 
        methods:{
@@ -62,7 +90,7 @@ export default {
       this.$router.push('/');
     },
     ppp: function(){
-      if (!$store.state.islogin) {
+      if (this.$session.get("id")==0) {
         this.$router.push("/login");
       } else {
         this.$axios({
@@ -72,12 +100,14 @@ export default {
             /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
             title:this.tit,
             type:"课程推荐",
-            content:this.textarea
+            content:this.textarea,
+            available_level:this.available_level
           }),
         }).then((res) => {
           switch (res.data.errno) {
             case 0:
               this.$message.success("发布成功");
+              this.$router.back();
               break;
             case 6002:
               this.$message.error("用户未登陆");

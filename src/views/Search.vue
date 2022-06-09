@@ -16,6 +16,7 @@
           <el-table-column type="index"> </el-table-column>
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
+                    <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column>
@@ -69,12 +70,10 @@ export default {
   },
   methods:{
     search: function(){
-      if (!$store.state.islogin) {
+      if (this.$session.get("id")==0) {
         this.$router.push("/Login");
       } else {
-         this.$store.dispatch('sear', {
-              inp:this.input
-        });
+        this.$store.state.input = this.input;
         this.$axios({
           method: "post" /* 指明请求方式，可以是 get 或 post */,
           url: "/api/post/search/" /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */,
@@ -95,8 +94,32 @@ export default {
       }
     },
     toDetail(val) { 
-      this.$store.dispatch('getpostid',val);
-        this.$router.push("/detail");    
+      this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:val
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              if(this.$store.state.level<res.data.post.available_level){
+                      this.$store.state.postid=val;
+                      this.$router.push("/detail");
+              }
+              else{
+                      this.$message.warning("未达到可查看等级");
+              }
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
   }
 };

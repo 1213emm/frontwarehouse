@@ -9,7 +9,8 @@ export default new Vuex.Store({
     username:'xxx',
     id:'',
     postid:'',
-    input:''
+    input:'',
+    level:0,
   },
   getters: {
   },
@@ -20,9 +21,6 @@ export default new Vuex.Store({
     logout(state){
       state.islogin = false
     },
-    sear(state,inp){
-      state.input=inp
-    }
   },
   actions: {
   },

@@ -132,7 +132,7 @@ export default{
       this.$router.push('/personal');
     },
     returnSearch: function(){
-      this.$router.push('/search');
+      this.$router.back();
     },
     report: function(){
       this.$message.success("举报成功");
@@ -272,7 +272,30 @@ export default{
              break;
           }
         });
-      window.scrollTo(0,document.body.scrollHeight);//跳转到页面底部，方便查看自己的评论
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/comment/',
+        params:{   
+        post_id:this.$store.state.postid
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+      setTimeout(() => {
+        window.scrollTo(0,document.body.scrollHeight);//跳转到页面底部，方便查看自己的评论
+        }, 1000);
     },//发送评论
     like1(val){
       this.comments[val-1].liked=true;
