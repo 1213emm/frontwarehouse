@@ -45,7 +45,7 @@ const routes = [
     path: '/publish',
     name: 'Publish',
     component: () => import( '../views/publish.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({
