@@ -1,6 +1,7 @@
 <template>
   <div id="contaner">
     <calendar></calendar>
+    <updown></updown>
     <div id="detail">
       <el-main id="main">
         <div id="top">
@@ -8,7 +9,7 @@
             <el-button type="danger" icon="el-icon-back" @click="returnSearch">返回</el-button>
           </span>
           <span style="float:left" id="author">楼主：{{post.user}}</span>
-          <span style="float:left" id="postDate">{{post.post_date}}</span>
+<!--          <span style="float:left" id="postDate">{{post.post_date}}</span>-->
         </div>
         <div id="post">
           <el-card>
@@ -19,6 +20,7 @@
           </el-card>
         </div>
         <div id="actions">
+          <span style="float:left" id="postDate">{{post.post_date}}</span>
           <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
           <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
           <!--根据是否已收藏返回不同图标-->
@@ -128,8 +130,9 @@
 <script>
 import qs from "qs";
 import Calendar from "@/components/calendar";
+import Updown from "@/components/updown";
 export default{
-  components: {Calendar},
+  components: {Updown, Calendar},
   data(){
     return{
       input:"",
