@@ -21,13 +21,26 @@
 
 <script>
     export default{
-        created(){
+  data() {
+    return {
+        AddSubmenuData:{
+          id:"",
+          pid:"",
+          funType:1,
+          name:"",
+          sort:"",
+          SystemCoding:"",
+          remarks:"",
+          imageUrl: ''
+        },
+    }
+  },
+  created(){
             //在页面加载时读取sessionStorage里的状态信息
-             if(sessionStorage.getItem('storeState')){
+      if(sessionStorage.getItem('storeState')){
           //replaceState，替换store的根状态
           this.$store.replaceState(Object.assign({},this.$store.state,JSON.parse(sessionStorage.getItem('storeState'))))
       }
-
   //在页面刷新时将vuex里的信息保存到sessionStorage里
          window.addEventListener('beforeunload',()=>{
          sessionStorage.setItem('storeState',JSON.stringify(this.$store.state))

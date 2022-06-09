@@ -17,15 +17,19 @@
           <el-menu-item @click="toLife" index="5"><i class="el-icon-basketball"></i>校园周边</el-menu-item>
         </el-menu>
       </div>
-      <div id="tip" v-if="mainIndex===1">
-        <el-card>
-          <div class="tipText">亲爱的游客，您好!</div>
-          <div class="tipText">您可以在本页面浏览不同板块的帖子以及他人对帖子的评论。</div>
-          <div class="tipText">您可以点击右上方登录按钮登录您自己的账号或注册一个新账号。</div>
-          <div class="tipText">登录后，您可以对帖子进行收藏、点赞、评论等操作，也可以对帖子下方的评论进行点赞操作。对违规的帖子和评论，您可以实行一键举报，管理员会审核您的举报信息。</div>
-          <div class="tipText">您可以发布自己的帖子。</div>
-          <div class="tipText">您可以点击右上方您的用户名进入您的个人空间，您可以在个人空间里修改个人信息，浏览收藏夹、历史记录、已发帖子等内容。</div>
-        </el-card>
+      <div id="newTable" v-if="mainIndex===1">
+        <el-table :data="xinPosts" style="width: 100%">
+          <el-table-column type="index"> </el-table-column>
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="post_date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="id">
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
       <div id="latestTable" v-if="mainIndex===2">
         <el-table :data="LatestPosts" style="width: 100%">
@@ -95,6 +99,17 @@ export default {
     return {
         input1:'',
         mainIndex:1,//不同值显示不同板块
+        xinPosts:[{
+            "id": 3,
+            "user": "朱姜逸扬",
+            "type": "最新发布",
+            "post_date": "2022-06-06T18:14:21.709Z",
+            "title": "最新",
+            "likes": 0,
+            "available_level": 0,
+            "resource": null,
+            "floor_num": 2
+        }],
         LatestPosts: [
         {
             "id": 3,
@@ -146,6 +161,26 @@ export default {
     }
   },
   created(){
+   this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/browse/',
+        params:{   
+        type:"新手上路"
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.xinPosts=res.data.posts;
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
       this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/browse/',

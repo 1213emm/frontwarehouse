@@ -20,6 +20,7 @@
                 <el-option label="课程推荐" value="课程推荐"></el-option>
                 <el-option label="刷题" value="刷题"></el-option>
                 <el-option label="校园周边" value="校园周边"></el-option>
+                <el-option label="校园周边" value="新手上路" v-if="level === 100"></el-option>
             </el-select>
               屏蔽等级：
                 <el-select class="types" placeholder="屏蔽等级" v-model="available_level">
@@ -83,14 +84,31 @@ export default {
               textarea:"",
               type:"",
               available_level:0,
+              level:0
           }
       }, 
+      created(){
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.data.level;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+      },
        methods:{
     personal: function(){
       this.$router.push('/');
     },
     ppp: function(){
-      if (this.$session.get("id")==0) {
+      if (!this.$store.state.islogin) {
         this.$router.push("/login");
       } else {
         this.$axios({
