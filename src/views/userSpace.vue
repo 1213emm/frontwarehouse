@@ -476,13 +476,8 @@ export default {
         .then((res) => {
           switch (res.data.errno) {
             case 0:
-              if(this.$store.state.level<res.data.post.available_level){
-                      this.$store.state.postid=val;
-                      this.$router.push("/detail");
-              }
-              else{
-                      this.$message.warning("未达到可查看等级");
-              }
+              this.$store.state.postid=val;
+              this.$router.push("/detail");
               break;
             case 12001:
               this.$message.error("请求方式错误");

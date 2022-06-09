@@ -120,8 +120,18 @@ export default{
               this.post=res.data.post;
               this.comments=res.data.comments;
               break;
-            case 12001:
+            case 7001:
               this.$message.error("请求方式错误");
+              break;
+            case 7002:
+              this.$message.error("用户未登陆");
+              break;
+            case 7006:
+              this.$message.error("等级不够无法查看");
+              this.$router.back();
+              break;
+            case 7003:
+              this.message.error("帖子ID不能为空");
               break;
           }
         })
@@ -225,7 +235,7 @@ export default{
             case 0:
               this.$message.success("取消收藏成功");
               break;
-            case 110002:
+            case 11002:
               this.$message.error("帖子ID不能为空");
               break;
           }

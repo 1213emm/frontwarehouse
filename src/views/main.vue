@@ -241,7 +241,7 @@ export default {
       if (this.$session.get("id")==0){
             this.$message.error("用户未登陆");
             this.$router.push('/Login');
-        }
+      }
       else{
         this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
