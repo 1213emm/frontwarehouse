@@ -262,7 +262,7 @@ export default {
             case 0:
               this.posts3=res.data.posts;
               break;
-            case 110002:
+            case 11002:
               this.$message.error("用户未登陆");
               break;
           }
@@ -319,7 +319,7 @@ export default {
        this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           id: val2,
         })
         })
@@ -338,13 +338,85 @@ export default {
         })
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      })
+      });
+              this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.level;
+              this.username=res.data.username;
+              this.description=res.data.description;
+              this.major=res.data.major;
+              this.sex=res.data.sex;
+              this.security_issue=res.data.security_issue;
+              this.security_answer=res.data.security_answer;
+              this.password=res.data.password;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+     this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.posts1=res.data.posts;
+              break;
+            case 9001:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts2=res.data.posts;
+              break;
+            case 10002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts3=res.data.posts;
+              break;
+            case 11002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
     tode2(val3){
         this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           id: val3,
           op:1
         })
@@ -364,7 +436,79 @@ export default {
         })
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      })
+      });
+              this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.level;
+              this.username=res.data.username;
+              this.description=res.data.description;
+              this.major=res.data.major;
+              this.sex=res.data.sex;
+              this.security_issue=res.data.security_issue;
+              this.security_answer=res.data.security_answer;
+              this.password=res.data.password;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+     this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.posts1=res.data.posts;
+              break;
+            case 9001:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts2=res.data.posts;
+              break;
+            case 10002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts3=res.data.posts;
+              break;
+            case 11002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
     tode3(val4){
         this.$axios({
@@ -389,7 +533,79 @@ export default {
         })
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      })
+      });
+              this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.level;
+              this.username=res.data.username;
+              this.description=res.data.description;
+              this.major=res.data.major;
+              this.sex=res.data.sex;
+              this.security_issue=res.data.security_issue;
+              this.security_answer=res.data.security_answer;
+              this.password=res.data.password;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+     this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.posts1=res.data.posts;
+              break;
+            case 9001:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts2=res.data.posts;
+              break;
+            case 10002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts3=res.data.posts;
+              break;
+            case 11002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
     tode4(val2){
        this.$axios({
@@ -414,7 +630,79 @@ export default {
         })
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      })
+      });
+              this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.level=res.data.level;
+              this.username=res.data.username;
+              this.description=res.data.description;
+              this.major=res.data.major;
+              this.sex=res.data.sex;
+              this.security_issue=res.data.security_issue;
+              this.security_answer=res.data.security_answer;
+              this.password=res.data.password;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+     this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/posted/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.posts1=res.data.posts;
+              break;
+            case 9001:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/history/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts2=res.data.posts;
+              break;
+            case 10002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/favorites/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.posts3=res.data.posts;
+              break;
+            case 11002:
+              this.$message.error("用户未登陆");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
   }
 };

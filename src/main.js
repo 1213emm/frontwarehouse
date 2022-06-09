@@ -12,7 +12,13 @@ Vue.prototype.$axios=Axios;
 //defaults 设置全局默认路径
 Axios.defaults.baseURL="http://localhost:8000";
 
-axios.defaults.withCredentials=true;
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies);
+
+Axios.defaults.withCredentials=true;
 
 Vue.config.productionTip = false;
 

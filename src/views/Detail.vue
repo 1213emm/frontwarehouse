@@ -153,7 +153,7 @@ export default{
             case 0:
               this.$message.success("收藏成功");
               break;
-            case 110002:
+            case 11002:
               this.$message.error("帖子ID不能为空");
               break;
           }
