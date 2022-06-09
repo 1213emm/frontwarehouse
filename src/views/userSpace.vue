@@ -2,7 +2,7 @@
   <el-container id="personal">
     <el-main id="main">
         <div>
-        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" v-if="level==100" @select="handleSelect" active-text-color="#ffd04b">
+        <el-menu id="menu" mode="horizontal" v-if="level==100" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
@@ -20,7 +20,7 @@
       </div>
       <div id="infoTable" v-if="personalIndex===1">
         <div>
-          <el-form ref="form" :model="form" label-width="80px">
+          <el-form  label-width="80px">
           <h1></h1>
             <el-form-item label="用户名">
               <el-input class="infoInput" :placeholder="username" v-model="input2"></el-input>
