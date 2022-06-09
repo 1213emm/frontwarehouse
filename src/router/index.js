@@ -47,7 +47,11 @@ const routes = [
     path: '/findback',
     name: 'findback',
     component: () => import( '../views/findback.vue')
-  },
+  },{
+    path:'/test',
+    name:'/test',
+    component: () => import( '../views/test.vue')
+  }
 ]
 
 const router = new VueRouter({

@@ -1,7 +1,10 @@
 <template>
   <div id="login" class="login">
     <div class="wrap">
-      <h1>登 录</h1>
+      <div id="return">
+        <span @click="toMain" style="cursor: pointer"><img src="../assets/返回.png" height="16px">返回</span>
+      </div>
+      <h2 style="font-weight: bold;color: #409EFF">登 录</h2>
       <el-form :model="form" ref="form" class="form">
         <el-form-item prop="username">
           <el-input placeholder="学号" type="username" v-model="form.id" autocomplete="off"></el-input>
@@ -17,7 +20,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item class="btn_login">
-          <el-button type="primary" @click="login">登&nbsp;&nbsp;录</el-button>
+          <el-button type="primary" @click="login" style="font-size: 18px">登&nbsp;录</el-button>
         </el-form-item>
       </el-form>
       <div class="suffix">
@@ -92,6 +95,9 @@ export default {
     tofind: function (){
       this.$router.push('/findback');
     },
+    toMain: function (){
+      this.$router.push('/');
+    },
     
   }
 }
@@ -99,7 +105,7 @@ export default {
 
 <style scoped>
 #login {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 黑体,'Noto Serif SC', serif;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -123,15 +129,15 @@ export default {
 }
 #login .wrap {
   width: 300px;
-  height: 315px;
-  padding: 0 25px 0 25px;
+  height: 330px;
+  padding: 10px 25px 0 25px;
   line-height: 40px;
-  position: relative;
-  display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin: 0 auto;
   margin-top: 150px;
   box-shadow: darkgrey 1px 1px 1px 1px ;
+  text-align: center;
 }
 #login .btn_login {
   margin-top: 25px;
@@ -156,5 +162,13 @@ export default {
   color:#999;
   cursor: pointer;
   float:right;
+}
+#return{
+  font-size: 15px;
+  color: #8c939d;
+  text-align: left;
+  margin-left: 0px;
+  height: 20px;
+  width: auto;
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
   <div id="login" class="login">
     <div class="wrap">
-      <h1>注 册</h1>
+      <div id="return">
+        <span @click="toLogin" style="cursor: pointer"><img src="../assets/返回.png" height="16px">返回</span>
+      </div>
+      <h1 style="font-weight: bold;color: #409EFF">注 册</h1>
       <el-form :model="form" ref="form" class="form">
         <el-form-item prop="username">
           <el-input placeholder="学号" v-model="form.id" autocomplete="off"></el-input>
@@ -29,7 +32,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item class="btn_login">
-          <el-button type="primary" @click="register">注&nbsp;&nbsp;册</el-button>
+          <el-button type="primary" @click="register" style="font-size: 18px">注&nbsp;&nbsp;册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,6 +54,9 @@ export default {
     }
   },
   methods: {
+    toLogin: function (){
+      this.$router.push('/login');
+    },
     register: function () {
       // 检查表单是否有填写内容
       if (this.form.id === '' || this.form.password1 === ''|| this.form.password2 === '' || this.form.username === '' || this.form.security_issue === '' || this.form.security_answer === '') {
@@ -95,7 +101,7 @@ export default {
 
 <style scoped>
 #login {
-  font-family: 'Noto Serif SC', serif;
+  font-family: '黑体','Noto Serif SC', serif;
   position:absolute;
   width: 100%;
   height: 100%;
@@ -120,14 +126,14 @@ export default {
 #login .wrap {
   width: 350px;
   height: auto;
-  padding: 0 25px 0 25px;
+  padding: 0 25px 10px 25px;
   line-height: 40px;
-  position: relative;
-  display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin: 0 auto;
   margin-top: 50px;
   box-shadow: darkgrey 1px 1px 1px 1px ;
+  text-align: center;
 }
 #login .btn_login {
   margin-top: 25px;
@@ -138,5 +144,13 @@ export default {
   font-family: 'Noto Serif SC', serif;
   width: 100%;
   height: 38px;
+}
+#return{
+  font-size: 15px;
+  color: #8c939d;
+  text-align: left;
+  margin-left: 0px;
+  height: 20px;
+  width: auto;
 }
 </style>
