@@ -1,6 +1,6 @@
 <template>
-  <el-container id="personal">
-    <el-main id="main">
+  <div id="personal">
+    <div id="main">
         <div>
         <el-menu id="menu" :default-active="activeIndex" mode="horizontal" v-if="level==100" @select="handleSelect" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
@@ -63,7 +63,6 @@
           <el-table-column prop="user" label="作者"></el-table-column>
           <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
             <template slot-scope="scope1">
               <el-link type="primary" @click="toDetail(cope1.row.id)">查看详情</el-link>
@@ -117,8 +116,8 @@
           </el-table-column>
         </el-table>
       </div>
-    </el-main>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -711,7 +710,12 @@ export default {
 <style scoped>
 #personal {
   font-family: 'Noto Serif SC', serif;
-  margin-top: 20px;
+  background-color: rgb(246,246,246);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin : 0 auto;
+	padding : 0;
 }
 #head {
   background-color: #d4e7d9;
@@ -720,9 +724,16 @@ export default {
   line-height: 60px;
 }
 #main {
-  background-color: #e9eef3;
+  /*background-color: #e9eef3;*/
+  background-color: white;
   color: #333;
   text-align: center;
+  width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 #aside {
   background-color: #D3DCE6;

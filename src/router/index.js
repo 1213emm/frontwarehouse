@@ -34,7 +34,7 @@ const routes = [
   {
     path: '/detail',
     name: 'detail',
-    component: () => import( '../views/Detail.vue')
+    component: () => import( '../views/Detail(1).vue')
   },{
     path: '/publish',
     name: 'publish',

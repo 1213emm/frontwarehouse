@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <el-container>
+  <div id="window">
    <el-header>
      <nav class="nav1">  
      <el-button type="primary" v-on:click="gotologin" v-if="!$store.state.islogin">登录</el-button>
@@ -11,11 +11,9 @@
              <el-button type="primary" v-on:click="logout" v-if="$store.state.islogin">退出登录</el-button>
       </nav>
     </el-header>
-    <el-main> 
-         <router-view/>
-    </el-main>
-        <el-button class="footer" type="primary" block @click="publish" v-if="$store.state.islogin">发帖</el-button>
-  </el-container>
+    <router-view/>
+    <el-button class="footer" type="primary" block @click="publish" v-if="$store.state.islogin">发帖</el-button>
+  </div>
   </div>
 </template>
 
@@ -89,5 +87,11 @@
   line-height: var(--footer-height);
   background: #42b983;
   color: #fff;
+}
+#window{
+  background-color: rgb(246,246,246);
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 </style>
