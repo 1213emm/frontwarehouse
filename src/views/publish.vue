@@ -27,6 +27,7 @@
                 <el-option label="课程推荐" value="课程推荐"></el-option>
                 <el-option label="刷题" value="刷题"></el-option>
                 <el-option label="校园周边" value="校园周边"></el-option>
+                <el-option label="资源共享" value="资源共享"></el-option>
                 <el-option label="新手上路" value="新手上路" v-if="level === 100"></el-option>
             </el-select>
               屏蔽等级：
