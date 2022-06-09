@@ -1,6 +1,9 @@
 <template>
   <div id="app">
   <el-container>
+        <el-header>
+      <h1>学习交流论坛</h1>
+    </el-header>
    <el-header>
      <nav class="nav1">  
      <el-button type="primary" v-on:click="gotologin" v-if="!this.$store.state.islogin">登录</el-button>
