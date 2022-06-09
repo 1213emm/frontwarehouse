@@ -48,6 +48,7 @@
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
+<input style="width: 74px;" type="file" id="uFile" name="uFile" @change="upload($event)"/>
             </div>
           </el-card>
         </div>
@@ -104,6 +105,33 @@ export default {
       });
       },
        methods:{
+  upload(e){
+      var that=this
+      var files = document.getElementById('uFile').value;
+      if (!/\.(gif|jpg|jpeg|png|gif|jpg|png)$/i.test(files)) {
+        this.$message.warning("图片类型必须是.gif,jpeg,jpg,png中的一种,请重新上传")
+        return false;
+      }
+      let file = e.target.files[0]    
+      let param = new FormData()// 创建form对象
+      param.append('title',tit)
+      param.append('type',type)
+      param.append('content',content)     
+      param.append('resource', file)       // 通过append向form对象添加数据
+      alert(file);
+      let config = {
+         headers: {'Content-Type': 'multipart/form-data'}
+      }
+      this.axios.post("/api/post/new/",param, config).then((res)=>{
+          if(res.data.errno){
+                this.$message.success("添加成功")  //需要引入elemrnt
+          }else{
+                this.$message.warning("添加失败")
+          }
+        }).catch((err)=>{
+                this.$message.warning("图片上传失败，请重新上传!")
+        })
+     },
     personal: function(){
       this.$router.push('/');
     },
