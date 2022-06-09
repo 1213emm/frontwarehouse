@@ -341,7 +341,7 @@ export default {
   color: #333;
   text-align: center;
 }
-#tip,#latestTable,#courseTable,#exerTable,#lifeTable {
+#tip,#latestTable,#courseTable,#exerTable,#lifeTable,#newTable{
   margin-top: 20px;
 }
 .tipText {

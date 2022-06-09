@@ -269,6 +269,7 @@ export default {
               this.security_issue=res.data.data.security_issue;
               this.security_answer=res.data.data.security_answer;
               this.password=res.data.data.password;
+              this.headshot=res.data.data.headshot;
               break;
           }
         })
@@ -906,7 +907,7 @@ export default {
             this.security_issue=this.input7,
             this.security_answer=this.input8,
             this.password=this.input9
-              this.$message.success("保存成功");
+            this.$message.success("保存成功");
               break;
           }
         })
@@ -940,7 +941,7 @@ export default {
   text-align: center;
   line-height: 200px;
 }
-#favorTable{
+#favorTable,#reported,#unban{
   margin-top: 20px;
 }
 </style>
