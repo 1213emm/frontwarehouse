@@ -135,7 +135,52 @@ export default{
       this.$router.back();
     },
     report: function(){
-      this.$message.success("举报成功");
+      this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/report/',
+        data: qs.stringify({
+          post_id:this.$store.state.postid,
+        })     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.$message.success("举报成功");
+              break;
+            case 15001:
+              this.$message.error("用户未登陆");
+              break;
+            case 15002:
+              this.$message.error("帖子ID不能为空");
+            case 15003:
+              this.$message.error("帖子不存在");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });       
+      this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/favorites/',
+        data: qs.stringify({
+          post_id:this.$store.state.postid,
+          op:0
+        })     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.$message.success("收藏成功");
+              break;
+            case 11002:
+              this.$message.error("帖子ID不能为空");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
       //交互
     },//举报帖子
     favor: function(){

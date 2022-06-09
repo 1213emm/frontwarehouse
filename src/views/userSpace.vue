@@ -271,6 +271,29 @@ export default {
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/report/'   /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              break;
+            case 15001:
+              this.$message.error("用户未登陆");
+              break;
+            case 15002:
+              this.$message.error("帖子ID不能为空");
+            case 15003:
+              this.$message.error("帖子不存在");
+              break;
+            case 15004:
+              this.$message.error("非管理员无法查看");
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });  
   },
   methods:{
     toInfo: function(){
