@@ -143,9 +143,9 @@ export default {
       input4: "",
       input5: "",
       input6: "",
-      input7:"",
-      input8:"",
-      input9:"",
+      input7: "",
+      input8: "",
+      input9: "",
       personalIndex:1, //根据该值个人空间显示不同的页面
       posts1: [
         {
@@ -340,7 +340,7 @@ export default {
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
-              this.$axios({
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
@@ -352,6 +352,7 @@ export default {
               this.description=res.data.description;
               this.major=res.data.major;
               this.sex=res.data.sex;
+              this.level=res.data.level;
               this.security_issue=res.data.security_issue;
               this.security_answer=res.data.security_answer;
               this.password=res.data.password;
@@ -450,6 +451,7 @@ export default {
               this.description=res.data.description;
               this.major=res.data.major;
               this.sex=res.data.sex;
+              this.level=res.data.level;
               this.security_issue=res.data.security_issue;
               this.security_answer=res.data.security_answer;
               this.password=res.data.password;
@@ -547,6 +549,7 @@ export default {
               this.description=res.data.description;
               this.major=res.data.major;
               this.sex=res.data.sex;
+              this.level=res.data.level;
               this.security_issue=res.data.security_issue;
               this.security_answer=res.data.security_answer;
               this.password=res.data.password;
@@ -644,6 +647,7 @@ export default {
               this.description=res.data.description;
               this.major=res.data.major;
               this.sex=res.data.sex;
+              this.level=res.data.level;
               this.security_issue=res.data.security_issue;
               this.security_answer=res.data.security_answer;
               this.password=res.data.password;
