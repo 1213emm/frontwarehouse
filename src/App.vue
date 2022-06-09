@@ -1,19 +1,7 @@
 <template>
-  <div id="app">
-  <div id="window">
-   <el-header>
-     <nav class="nav1">  
-     <el-button type="primary" v-on:click="gotologin" v-if="!$store.state.islogin">登录</el-button>
-      <h1 v-if="$store.state.islogin">欢迎,
-      <router-link to="/User">{{$store.state.username}}</router-link></h1>
-      </nav>
-      <nav class="nav2">
-             <el-button type="primary" v-on:click="logout" v-if="$store.state.islogin">退出登录</el-button>
-      </nav>
-    </el-header>
+  <div>
+    <nav></nav>
     <router-view/>
-    <el-button class="footer" type="primary" block @click="publish" v-if="$store.state.islogin">发帖</el-button>
-  </div>
   </div>
 </template>
 
