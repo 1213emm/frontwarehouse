@@ -1,53 +1,135 @@
 <template>
-  <el-container id="detail">
-    <el-main id="main">
-      <div id="top">
+  <div id="contaner">
+    <calendar></calendar>
+    <div id="detail">
+      <el-main id="main">
+        <div id="top">
           <span style="float:left">
             <el-button type="danger" icon="el-icon-back" @click="returnSearch">返回</el-button>
           </span>
-        <span style="float:left" id="author">楼主：{{post.user}}</span>
-        <span style="float:left" id="postDate">{{post.post_date}}</span>
-      </div>
-      <div id="post">
-        <el-card>
-          <div slot="header" id="postHead">
-            <h1 id="title">{{post.title}}</h1>
-          </div>
-          <div>{{comments[0].content}}</div>
-        </el-card>
-      </div>
-      <div id="actions">
-        <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
-        <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
-        <!--根据是否已收藏返回不同图标-->
-        <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="post.favorite">取消收藏</el-button>
-        <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" round v-else>加入收藏</el-button>
-        <!--根据是否已点赞返回不同图标-->
-        <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="post.liked">取消点赞</el-button>
-        <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
-      </div>
-      <div id="addComment" v-if="addComment">
-        <el-input placeholder="你的想法" v-model="input" @keyup.enter.native="finish" clearable>
-          <el-button type="primary" icon="el-icon-s-promotion" slot="append" @click="finish">发送</el-button>
-        </el-input>
-      </div>
-      <div id="comments">
-        <div class="floor" v-for="item in comments" :key="item.floor">
-          <div class="speaker" v-if="item.floor!=1">
-            <span style="float:left;margin-top:10px">{{item.floor}}楼:</span>
-            <span style="float:left;margin-top:10px">{{item.user.username}}   评论时间:</span>
-            <span style="float:left;margin-top:10px">{{item.comment_time}}</span>
-          </div>
-          <div class="say" v-if="item.floor!=1"><el-card>{{item.content}}</el-card></div>
+          <span style="float:left" id="author">楼主：{{post.user}}</span>
+          <span style="float:left" id="postDate">{{post.post_date}}</span>
         </div>
-      </div>
-    </el-main>
-  </el-container>
+        <div id="post">
+          <el-card>
+            <div slot="header" id="postHead">
+              <h1 id="title">{{post.title}}</h1>
+            </div>
+            <div>{{comments[0].content}}</div>
+          </el-card>
+        </div>
+        <div id="actions">
+          <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
+          <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
+          <!--根据是否已收藏返回不同图标-->
+          <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="post.favorite">取消收藏</el-button>
+          <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" round v-else>加入收藏</el-button>
+          <!--根据是否已点赞返回不同图标-->
+          <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="post.liked">取消点赞</el-button>
+          <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
+        </div>
+        <div id="addComment" v-if="addComment">
+          <el-input placeholder="你的想法" v-model="input" @keyup.enter.native="finish" clearable>
+            <el-button type="primary" icon="el-icon-s-promotion" slot="append" @click="finish">发送</el-button>
+          </el-input>
+        </div>
+        <div id="comments">
+          <div class="floor" v-for="item in comments" :key="item.floor">
+            <div class="speaker" v-if="item.floor!=1">
+              <span style="float:left;margin-top:10px">{{item.floor}}楼:</span>
+              <span style="float:left;margin-top:10px">{{item.user.username}}   评论时间:</span>
+              <span style="float:left;margin-top:10px">{{item.comment_time}}</span>
+            </div>
+            <div class="say" v-if="item.floor!=1"><el-card>{{item.content}}</el-card></div>
+          </div>
+        </div>
+      </el-main>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+
+#contaner{
+  position: absolute;
+  width: 100%;
+  min-height: 800px;
+  background-color: rgb(246,246,246);
+}
+#detail {
+  font-family: 'Noto Serif SC', serif;
+  margin-top: 20px;
+  margin-left: 200px;
+  width: 900px;
+  background-color: white;
+  box-shadow: darkgrey 1px 1px 1px 1px;
+}
+#head {
+  background-color: #d4e7d9;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+#main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+}
+#top {
+  height:60px;
+}
+#author {
+  font-size: 120%;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+#postDate {
+  font-size: 120%;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+#title {
+  font-size: 200%;
+}
+#actions {
+  padding-top: 10px;
+  height: 46.2px
+}
+.act {
+  float: right;
+  margin-left: 20px;
+}
+#comments {
+}
+.floor {
+  margin-top: 10px;
+}
+.speaker {
+  font-size: 110%;
+  height:40px;
+  padding-right:10px;
+  padding-top:10px;
+}
+.say {
+  padding-top:10px;
+}
+.act1 {
+  float: left;
+  margin-left: 10px;
+}
+#addComment {
+  margin-top:30px
+}
+</style>
+
+
+
 
 <script>
 import qs from "qs";
+import Calendar from "@/components/calendar";
 export default{
+  components: {Calendar},
   data(){
     return{
       input:"",
@@ -584,66 +666,3 @@ export default{
   }
 }
 </script>
-
-<style scoped>
-#detail {
-  font-family: 'Noto Serif SC', serif;
-  margin-top: 20px;
-}
-#head {
-  background-color: #d4e7d9;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-#main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-}
-#top {
-  height:60px;
-}
-#author {
-  font-size: 120%;
-  margin-left: 20px;
-  margin-top: 10px;
-}
-#postDate {
-  font-size: 120%;
-  margin-left: 20px;
-  margin-top: 10px;
-}
-#title {
-  font-size: 200%;
-}
-#actions {
-  padding-top: 10px;
-  height: 46.2px
-}
-.act {
-  float: right;
-  margin-left: 20px;
-}
-#comments {
-}
-.floor {
-  margin-top: 10px;
-}
-.speaker {
-  font-size: 110%;
-  height:40px;
-  padding-right:10px;
-  padding-top:10px;
-}
-.say {
-  padding-top:10px;
-}
-.act1 {
-  float: left;
-  margin-left: 10px;
-}
-#addComment {
-  margin-top:30px
-}
-</style>

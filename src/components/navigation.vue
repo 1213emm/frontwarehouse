@@ -6,10 +6,9 @@
     </span>
     <span v-if="$store.state.islogin">
       <span id="right_font" v-on:click="logout"><img src="../assets/注销.png" height="32px"></span>
-      <span id="right_font"><img src="../assets/历史.png" height="32px"></span>
-      <span id="right_font"><img src="../assets/收藏.png" height="32px"></span>
-      <span id="right_font"><img src="../assets/动态.png" height="32px"></span>
-      <span id="headshot"><img src="../assets/用户.png" height="45px"></span>
+      <span id="right_font"><img src="../assets/用户.png" height="32px"></span>
+      <span id="right_font"><img src="../assets/主页.png" height="32px"></span>
+
     </span>
 <!--    <span id="left">不知道怎么操作？点击前往<span style="color: deepskyblue;cursor: pointer;">新手上路！</span></span>-->
   </div>
