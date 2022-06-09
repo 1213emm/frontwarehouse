@@ -1,6 +1,7 @@
 <template>
   <div>
-    <navigation></navigation>
+    <clock>
+    </clock>
   </div>
 </template>
 
@@ -9,8 +10,9 @@ import Navigation from "@/components/navigation";
 import Updown from "@/components/updown";
 import Slid from "@/components/slid";
 import Calendar from "@/components/calendar";
+import Clock from "@/components/clock";
 export default {
-  components: {Navigation, Calendar}
+  components: {Clock, Navigation, Calendar}
 }
 </script>
 

@@ -1,41 +1,74 @@
 <template>
-  <el-container id="search">
-    <el-header>
-    <div class="wrap">
-<el-input v-model="input" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
-<template slot="append"><el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button></template>
-</el-input>
-</div>
-    </el-header>
-        <el-header>
-        <div type="top">
-        <span style="float:left">
-            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
-        </span>
+  <div id="contaner">
+    <div id="search">
+      <div id="head">
+        <div id="wrap">
+          <el-input v-model="input" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
+            <template slot="append"><el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button></template>
+          </el-input>
         </div>
-    </el-header>
-    <el-main id="main">
-      <div>
-        <h3 style="float: left">查找如下：</h3>
+        <div style="float: left">
+            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
+        </div>
       </div>
-      <div>
-        <el-table :data="posts" style="width: 100%">
-          <el-table-column type="index"> </el-table-column>
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="user" label="作者"></el-table-column>
-                    <el-table-column prop="type" label="类型"></el-table-column>
-          <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column>
-            <template slot-scope="scope">
-<el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-    </el-main>
-  </el-container>
+      <el-main id="main">
+        <div >
+          <h2 style="float: left">查找如下：</h2>
+        </div>
+        <div>
+          <el-table :data="posts" style="width: 100%">
+            <el-table-column type="index"> </el-table-column>
+            <el-table-column prop="title" label="标题"></el-table-column>
+            <el-table-column prop="user" label="作者"></el-table-column>
+            <el-table-column prop="type" label="类型"></el-table-column>
+            <el-table-column prop="post_date" label="日期"></el-table-column>
+            <el-table-column prop="likes" label="点赞数"></el-table-column>
+            <el-table-column>
+              <template slot-scope="scope">
+                <el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-main>
+    </div>
+  </div>
 </template>
+
+
+<style scoped>
+#contaner{
+  position: absolute;
+  width: 100%;
+  min-height: 800px;
+  background-color: rgb(246,246,246);
+}
+#search{
+  font-family: 黑体,'Noto Serif SC', serif;
+  margin: 0 auto;
+  margin-top: 20px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  width: 1200px;
+  padding: 20px;
+}
+#head {
+  background-color:white;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+  width: 1160px;
+  padding: 10px;
+  height: 60px;
+  margin: 0 auto;
+}
+#wrap{
+  width: 500px;
+  float: right;
+}
+</style>
+
+
 
 <script>
 import qs from "qs";
@@ -150,20 +183,3 @@ export default {
 };
 </script>
 
-<style scoped>
-#search {
-  font-family: 'Noto Serif SC', serif;
-  margin-top: 20px;
-}
-#head {
-  background-color: #d4e7d9;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
-}
-#main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-}
-</style>

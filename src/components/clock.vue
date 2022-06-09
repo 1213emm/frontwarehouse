@@ -1,7 +1,6 @@
 <template>
   <div>
     <canvas id="clock" height="200px" width="200px"></canvas>
-
   </div>
 </template>
 

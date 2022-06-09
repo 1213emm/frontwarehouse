@@ -1,8 +1,8 @@
 <template>
   <div id="slid">
-    <el-carousel height="200px">
+    <el-carousel height="290px">
       <el-carousel-item v-for="item in pics" :key="item.url">
-        <img :src="item.url"/>
+        <img :src="item.url" width="580px" height="290px"/>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -15,10 +15,10 @@ export default {
   data() {
     return {
       pics: [
-        { url: require("../assets/pic1.png") },
-        { url: require("../assets/pic2.png") },
-        { url: require("../assets/pic3.png") },
-        { url: require("../assets/pic4.png") }
+        { url: require("../assets/pic1.jpeg") },
+        { url: require("../assets/pic2.jpeg") },
+        { url: require("../assets/pic3.jpeg") },
+        { url: require("../assets/pic4.jpeg") }
       ]
     };
   }
@@ -27,8 +27,9 @@ export default {
 
 <style>
 #slid{
-  width: 300px;
-  margin: 0 auto;
+  width: 580px;
+  box-shadow: darkgrey 1px 1px 1px 1px;
+  float: left;
 }
 
 .el-carousel__item h3 {

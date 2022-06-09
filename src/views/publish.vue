@@ -53,15 +53,25 @@
         </div>
     </el-main>
     <el-footer >
-        <el-button type="primary" @click="ppp" style="float: right">发布</el-button>
+        <el-button type="primary" @click="ppp" style="float: left">发布</el-button>
     </el-footer>
   </el-container>
 </template>
 
 <style scoped>
-#search {
-  font-family: 'Noto Serif SC', serif;
+#contaner{
+  position: absolute;
+  width: 100%;
+  min-height: 800px;
+  background-color: rgb(246,246,246);
+}
+#publish{
+  font-family: 黑体,'Noto Serif SC', serif;
+  margin: 0 auto;
   margin-top: 20px;
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  width: 1000px;
+  padding: 20px;
 }
 #head {
   background-color: #d4e7d9;

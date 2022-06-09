@@ -19,8 +19,8 @@ export default {
 <style>
 #updown{
     position: fixed;
-    left: 75px;
-    top: 250px;
+    left: 60px;
+    top: 225px;
 }
 #updown .tmp{
   margin-top: 20px;
