@@ -205,15 +205,15 @@ export default {
         .then((res) => {
           switch (res.data.errno){
             case 0:
-              this.level=res.data.level;
-              this.username=res.data.username;
-              this.description=res.data.description;
-              this.major=res.data.major;
-              this.level=res.data.level;
-              this.sex=res.data.sex;
-              this.security_issue=res.data.security_issue;
-              this.security_answer=res.data.security_answer;
-              this.password=res.data.password;
+              this.level=res.data.data.level;
+              this.username=res.data.data.username;
+              this.description=res.data.data.description;
+              this.major=res.data.data.major;
+              this.level=res.data.data.level;
+              this.sex=res.data.data.sex;
+              this.security_issue=res.data.data.security_issue;
+              this.security_answer=res.data.data.security_answer;
+              this.password=res.data.data.password;
               break;
           }
         })
@@ -347,15 +347,15 @@ export default {
         .then((res) => {
           switch (res.data.errno){
             case 0:
-              this.level=res.data.level;
-              this.username=res.data.username;
-              this.description=res.data.description;
-              this.major=res.data.major;
-              this.sex=res.data.sex;
-              this.level=res.data.level;
-              this.security_issue=res.data.security_issue;
-              this.security_answer=res.data.security_answer;
-              this.password=res.data.password;
+              this.level=res.data.data.level;
+              this.username=res.data.data.username;
+              this.description=res.data.data.description;
+              this.major=res.data.data.major;
+              this.sex=res.data.data.sex;
+              this.level=res.data.data.level;
+              this.security_issue=res.data.data.security_issue;
+              this.security_answer=res.data.data.security_answer;
+              this.password=res.data.data.password;
               break;
           }
         })
@@ -446,15 +446,15 @@ export default {
         .then((res) => {
           switch (res.data.errno){
             case 0:
-              this.level=res.data.level;
-              this.username=res.data.username;
-              this.description=res.data.description;
-              this.major=res.data.major;
-              this.sex=res.data.sex;
-              this.level=res.data.level;
-              this.security_issue=res.data.security_issue;
-              this.security_answer=res.data.security_answer;
-              this.password=res.data.password;
+              this.level=res.data.data.level;
+              this.username=res.data.data.username;
+              this.description=res.data.data.description;
+              this.major=res.data.data.major;
+              this.sex=res.data.data.sex;
+              this.level=res.data.data.level;
+              this.security_issue=res.data.data.security_issue;
+              this.security_answer=res.data.data.security_answer;
+              this.password=res.data.data.password;
               break;
           }
         })
@@ -544,15 +544,15 @@ export default {
         .then((res) => {
           switch (res.data.errno){
             case 0:
-              this.level=res.data.level;
-              this.username=res.data.username;
-              this.description=res.data.description;
-              this.major=res.data.major;
-              this.sex=res.data.sex;
-              this.level=res.data.level;
-              this.security_issue=res.data.security_issue;
-              this.security_answer=res.data.security_answer;
-              this.password=res.data.password;
+              this.level=res.data.data.level;
+              this.username=res.data.data.username;
+              this.description=res.data.data.description;
+              this.major=res.data.data.major;
+              this.sex=res.data.data.sex;
+              this.level=res.data.data.level;
+              this.security_issue=res.data.data.security_issue;
+              this.security_answer=res.data.data.security_answer;
+              this.password=res.data.data.password;
               break;
           }
         })
@@ -642,15 +642,15 @@ export default {
         .then((res) => {
           switch (res.data.errno){
             case 0:
-              this.level=res.data.level;
-              this.username=res.data.username;
-              this.description=res.data.description;
-              this.major=res.data.major;
-              this.sex=res.data.sex;
-              this.level=res.data.level;
-              this.security_issue=res.data.security_issue;
-              this.security_answer=res.data.security_answer;
-              this.password=res.data.password;
+              this.level=res.data.data.level;
+              this.username=res.data.data.username;
+              this.description=res.data.data.description;
+              this.major=res.data.data.major;
+              this.sex=res.data.data.sex;
+              this.level=res.data.data.level;
+              this.security_issue=res.data.data.security_issue;
+              this.security_answer=res.data.data.security_answer;
+              this.password=res.data.data.password;
               break;
           }
         })
