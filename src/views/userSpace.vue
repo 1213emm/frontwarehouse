@@ -1,10 +1,14 @@
 <template>
   <el-container id="personal">
+    <el-header>
+        <div type="top">
+        <span style="float:left">
+            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
+        </span>
+        </div>
+    </el-header>
     <el-main id="main">
         <div>
-         <span style="float:left">
-            <el-button type="danger" icon="el-icon-back" @click="returnSearch">返回</el-button>
-        </span>
         <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
@@ -70,7 +74,7 @@
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
             <template slot-scope="scope1">
-              <el-link type="primary" @click="toDetail(cope1.row.id)">查看详情</el-link>
+              <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
               <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
             </template>
           </el-table-column>
@@ -363,6 +367,9 @@ export default {
     },
     toban: function(){
       this.personalIndex=6;
+    },
+    returnd: function(){
+      this.$router.back();
     },
     ban(valv){
         this.$axios({
@@ -880,17 +887,19 @@ export default {
       });
     },
     save: function(){
+
         this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-            username:this.username,
-            description:this.description,
-            grade:this.grade,
-            major:this.grade,
-            sex:this.sex,
-            security_issue:this.security_issue,
-            security_answer:this.security_answer
+            username:this.input2,
+            description:this.input3,
+            grade:this.input4,
+            major:this.input5,
+            sex:this.input6,
+            security_issue:this.input7,
+            security_answer:this.input8,
+            password:this.input9
         })
         })
         .then((res) => {
