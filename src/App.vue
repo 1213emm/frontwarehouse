@@ -3,24 +3,36 @@
   <el-container>
    <el-header>
      <nav class="nav1">  
-     <el-button type="primary" v-on:click="gotologin" v-if="!$store.state.islogin">登录</el-button>
+     <el-button type="primary" v-on:click="gotologin" v-if="!this.$store.state.islogin">登录</el-button>
       <h1 v-if="$store.state.islogin">欢迎,
       <router-link to="/User">{{$store.state.username}}</router-link></h1>
       </nav>
       <nav class="nav2">
-             <el-button type="primary" v-on:click="logout" v-if="$store.state.islogin">退出登录</el-button>
+             <el-button type="primary" v-on:click="logout" v-if="this.$store.state.islogin">退出登录</el-button>
       </nav>
     </el-header>
     <el-main> 
          <router-view/>
     </el-main>
-        <el-button class="footer" type="primary" block @click="publish" v-if="$store.state.islogin">发帖</el-button>
+        <el-button class="footer" type="primary" block @click="publish" v-if="this.$store.state.islogin">发帖</el-button>
   </el-container>
   </div>
 </template>
 
 <script>
     export default{
+        created(){
+            //在页面加载时读取sessionStorage里的状态信息
+             if(sessionStorage.getItem('storeState')){
+          //replaceState，替换store的根状态
+          this.$store.replaceState(Object.assign({},this.$store.state,JSON.parse(sessionStorage.getItem('storeState'))))
+      }
+
+  //在页面刷新时将vuex里的信息保存到sessionStorage里
+         window.addEventListener('beforeunload',()=>{
+         sessionStorage.setItem('storeState',JSON.stringify(this.$store.state))
+          })
+      },
       methods:{
         gotologin(){
           this.$router.push('/Login');
