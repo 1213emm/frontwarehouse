@@ -43,7 +43,7 @@
           <el-button class="act" icon="el-icon-circle-check" type="primary" circle></el-button>
         </div>
       </div>
-        <div id="textEdit">
+        <div id="bottom">
           <div id="title">
           发表回复
           </div>
@@ -165,23 +165,23 @@
   float: left;
   margin-left: 10px;
 }
-#textEdit{
+#bottom{
   margin: 0 auto;
   width: 700px;
   background-color: white;
   margin-top: 10px;
   box-shadow: darkgrey 1px 1px 1px 1px ;
 }
-#textEdit #title{
+#bottom #title{
   font: 20px bold;
   margin-top: 10px;
   margin-bottom: 5px;
   text-align: center;
 }
-#textEdit #area{
+#bottom #area{
   height: 370px;
 }
-#textEdit #btn{
+#bottom #btn{
   text-align: center;
 }
 </style>

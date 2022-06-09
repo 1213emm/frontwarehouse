@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    islogin: false,
+    islogin: true,
     username:'xxx',
     id:'',
     postid:'',
