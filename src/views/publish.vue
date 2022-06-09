@@ -21,8 +21,7 @@
               type="textarea"
               :autosize="{ minRows: 20, maxRows: 100 }"
               placeholder="请输入内容"
-              v-model="textarea"
-            >
+              v-model="textarea">
             </el-input>
           </div>
         </el-card>
@@ -30,8 +29,7 @@
     </el-main>
     <el-footer>
       <el-button type="primary" @click="personal" style="float: right"
-        >发布</el-button
-      >
+        >发布</el-button>
     </el-footer>
   </el-container>
 </template>
