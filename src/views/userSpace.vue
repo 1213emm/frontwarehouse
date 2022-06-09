@@ -2,12 +2,16 @@
   <el-container id="personal">
     <el-main id="main">
         <div>
+         <span style="float:left">
+            <el-button type="danger" icon="el-icon-back" @click="returnSearch">返回</el-button>
+        </span>
         <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
           <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
           <el-menu-item @click="toReports" index="5"><i class="el-icon-warning"></i>被举报帖子</el-menu-item>
+          <el-menu-item @click="toban" index="6"><i class="el-icon-warning"></i>被禁言用户</el-menu-item>
         </el-menu>
       </div>
       <div>
@@ -102,17 +106,35 @@
           </el-table-column>
         </el-table>
       </div>
-        <div id="favorTable" v-if="personalIndex===5">
+        <div id="reported" v-if="personalIndex===5">
         <el-table :data="posts4" style="width: 100%">
+        <h1>待更改</h1>
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
-                    <el-table-column prop="type" label="类型"></el-table-column>
+          <el-table-column prop="userid" label="学号"></el-table-column>
+          <el-table-column prop="type" label="类型"></el-table-column>
           <el-table-column prop="post_date" label="日期"></el-table-column>
           <el-table-column prop="likes" label="点赞数"></el-table-column>
           <el-table-column prop="id" >
             <template slot-scope="scope4">
               <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
               <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
+            </template>
+          </el-table-column>
+          <el-table-column prop="user_id" >
+            <template slot-scope="scope4">
+              <el-button type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div id="unban" v-if="personalIndex===6">
+        <el-table :data="users" style="width: 100%">
+          <el-table-column prop="id" label="学号"></el-table-column>
+          <el-table-column prop="username" label="用户名"></el-table-column>
+          <el-table-column prop="id">
+            <template slot-scope="scope5">
+              <el-button type="primary" @click="unban(scope5.row.id)">解除禁言</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -183,21 +205,48 @@ export default {
             "resource": null,
             "floor_num": 2
         }],
-        posts4: [
+        posts4:[
         {
             "id": 3,
             "user": "被举报了",
+            "user_id":"",
             "type": "课程推荐",
             "post_date": "2022-06-06T18:14:21.709Z",
             "title": "关注嘉然今天吃什么",
             "likes": 0,
+            "report_times": 2,
             "available_level": 0,
             "resource": null,
             "floor_num": 2
-        }]
+        }],
+      users: [
+        {
+            "id": 20373615,
+            "username": "朱姜逸扬",
+            "description": "",
+            "grade": 2,
+            "major": "软件工程",
+            "sex": true,
+            "headshot": "/media/user_20373615/headshot/headshot.jpg"
+        }
+    ]
     };
   },
   created(){
+        this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.users=res.data.users;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
         this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
@@ -278,6 +327,7 @@ export default {
         .then((res) => {
           switch (res.data.errno) {
             case 0:
+              this.posts4=res.data.posts;
               break;
             case 15001:
               this.$message.error("用户未登陆");
@@ -288,12 +338,12 @@ export default {
               this.$message.error("帖子不存在");
               break;
             case 15004:
-              this.$message.error("非管理员无法查看");
+              break;
           }
         })
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });  
+      }); 
   },
   methods:{
     toInfo: function(){
@@ -310,6 +360,103 @@ export default {
     },
     toReports: function(){
       this.personalIndex=5;
+    },
+    toban: function(){
+      this.personalIndex=6;
+    },
+    ban(valv){
+        this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/ban/',
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+          user_id: valv,
+        })
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              this.$message.success("禁言成功");
+              break;
+            case 16001:
+              this.$message.error("用户未登陆");
+              break;
+            case 16002:
+              this.$message.error("非管理员用户不能禁言用户");
+              break;
+            case 16003:
+              this.$message.error("用户ID不能为空");
+              break;
+            case 16004:
+              this.$message.error("用户不存在");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+      this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.users=res.data.users;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    },
+     unban(valu){
+        this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/ban/',
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+          user_id: valu,
+        })
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.post=res.data.post;
+              this.comments=res.data.comments;
+              this.$message.success("解除禁言成功");
+              break;
+            case 16001:
+              this.$message.error("用户未登陆");
+              break;
+            case 16002:
+              this.$message.error("非管理员用户不能禁言用户");
+              break;
+            case 16003:
+              this.$message.error("用户ID不能为空");
+              break;
+            case 16004:
+              this.$message.error("用户不存在");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+      this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/ban/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno){
+            case 0:
+              this.users=res.data.users;
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
     },
     toDetail(val) { 
       this.$axios({

@@ -156,7 +156,7 @@ export default {
         .then((res) => {
           switch (res.data.errno) {
             case 0:
-              this.Latestposts=res.data.posts;
+              this.LatestPosts=res.data.posts;
               break;
             case 12001:
               this.$message.error("请求方式错误");
@@ -166,7 +166,7 @@ export default {
       .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
-            this.$axios({
+        this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/browse/',
         params:{   
