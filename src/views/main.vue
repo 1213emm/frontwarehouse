@@ -15,6 +15,7 @@
           <el-menu-item @click="toCourse" index="3"><i class="el-icon-magic-stick"></i>课程推荐</el-menu-item>
           <el-menu-item @click="toExer" index="4"><i class="el-icon-reading"></i>刷题</el-menu-item>
           <el-menu-item @click="toLife" index="5"><i class="el-icon-basketball"></i>校园周边</el-menu-item>
+          <el-menu-item @click="tore" index="6"><i class="el-icon-basketball"></i>资源共享</el-menu-item>
         </el-menu>
       </div>
       <div id="newTable" v-if="mainIndex===1">
@@ -87,7 +88,22 @@
           </el-table-column>
         </el-table>
       </div>
+      <div id="lifeTable" v-if="mainIndex===6">
+        <el-table :data="rePosts" style="width: 100%">
+          <el-table-column type="index"> </el-table-column>
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="post_date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="id">
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </el-main>
+    <el-button class="footer" type="primary" block @click="publish" v-if="this.$store.state.islogin">发帖</el-button>
   </el-container>
 </template>
 
@@ -97,77 +113,90 @@ export default {
   name: "main",
   data() {
     return {
-        input1:'',
-        mainIndex:1,//不同值显示不同板块
-        xinPosts:[{
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "最新发布",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "最新",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
-        }],
-        LatestPosts: [
+      input1:'',
+      mainIndex:1,//不同值显示不同板块
+      xinPosts:[{
+        "id": 3,
+        "user": "朱姜逸扬",
+        "type": "最新发布",
+        "post_date": "2022-06-06T18:14:21.709Z",
+        "title": "最新",
+        "likes": 0,
+        "available_level": 0,
+        "resource": null,
+        "floor_num": 2
+      }],
+      LatestPosts: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "最新发布",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "最新",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "最新发布",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "最新",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        CoursePosts: [
+      CoursePosts: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "课程推荐",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "课程推荐",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "课程推荐",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "课程推荐",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        ExerPosts: [
+      ExerPosts: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "刷题",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "刷题",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "刷题",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "刷题",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
         }],
-        LifePosts: [
+      LifePosts: [
         {
-            "id": 3,
-            "user": "朱姜逸扬",
-            "type": "校园周边",
-            "post_date": "2022-06-06T18:14:21.709Z",
-            "title": "校园周边",
-            "likes": 0,
-            "available_level": 0,
-            "resource": null,
-            "floor_num": 2
-        }]
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "校园周边",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "校园周边",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
+        }],
+      rePosts:[
+        {
+          "id": 3,
+          "user": "朱姜逸扬",
+          "type": "资源共享",
+          "post_date": "2022-06-06T18:14:21.709Z",
+          "title": "资源共享",
+          "likes": 0,
+          "available_level": 0,
+          "resource": null,
+          "floor_num": 2
+        }
+      ]
     }
   },
   created(){
-   this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/browse/',
-        params:{   
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
         type:"新手上路"
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -178,16 +207,16 @@ export default {
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-      this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/browse/',
-        params:{   
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
         type:"最新"
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -198,16 +227,16 @@ export default {
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/browse/',
-        params:{   
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
         type:"课程推荐"
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -218,16 +247,16 @@ export default {
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-            this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/browse/',
-        params:{   
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
         type:"刷题"
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -238,16 +267,16 @@ export default {
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-              this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/browse/',
-        params:{   
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
         type:"校园周边"
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
         .then((res) => {
           switch (res.data.errno) {
             case 0:
@@ -258,48 +287,71 @@ export default {
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-  }, 
-  methods: {
-    search:function () {
-       if (!this.$store.state.islogin){
-                this.$router.push('/Login');
-        }
-        else{
-            this.$store.state.input=this.input1;
-            this.$router.push('/search');
-        }
-      },
-    toDetail(val) { 
-      if (!this.$store.state.islogin){
-            this.$message.error("用户未登陆");
-            this.$router.push('/Login');
-      }
-      else{
-        this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
-        url: '/api/post/comment/',
-        params:{   
-        post_id:val
-        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        })
-       .then((res) => {
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+    this.$axios({
+      method: 'get',           /* 指明请求方式，可以是 get 或 post */
+      url: '/api/post/browse/',
+      params:{
+        type:"资源共享"
+      }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+    })
+        .then((res) => {
           switch (res.data.errno) {
             case 0:
-              this.$store.state.postid=val;
-               this.$router.push("/detail");   
+              this.rePosts=res.data.posts;
               break;
-            case 7001:
+            case 12001:
               this.$message.error("请求方式错误");
               break;
           }
         })
-      .catch(err => {
-        console.log(err);         /* 若出现异常则在终端输出相关信息 */
-      });
-         }
+        .catch(err => {
+          console.log(err);         /* 若出现异常则在终端输出相关信息 */
+        });
+  },
+  methods: {
+    publish(){
+      this.$router.push('/publish');
+    },
+    search:function () {
+      if (!this.$store.state.islogin){
+        this.$router.push('/Login');
+      }
+      else{
+        this.$store.state.input=this.input1;
+        this.$router.push('/search');
+      }
+    },
+    toDetail(val) {
+      if (!this.$store.state.islogin){
+        this.$message.error("用户未登陆");
+        this.$router.push('/Login');
+      }
+      else{
+        this.$axios({
+          method: 'get',           /* 指明请求方式，可以是 get 或 post */
+          url: '/api/post/comment/',
+          params:{
+            post_id:val
+          }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+            .then((res) => {
+              switch (res.data.errno) {
+                case 0:
+                  this.$store.state.postid=val;
+                  this.$router.push("/detail");
+                  break;
+                case 7001:
+                  this.$message.error("请求方式错误");
+                  break;
+              }
+            })
+            .catch(err => {
+              console.log(err);         /* 若出现异常则在终端输出相关信息 */
+            });
+      }
     },//val为帖子id，交互时传到后端
     toTip: function(){
       this.mainIndex=1;
@@ -321,6 +373,9 @@ export default {
       this.mainIndex=5;
       //交互获得校园周边帖子
     },
+    tore: function(){
+      this.mainIndex=6;
+    }
   }
 }
 </script>
@@ -341,7 +396,7 @@ export default {
   color: #333;
   text-align: center;
 }
-#tip,#latestTable,#courseTable,#exerTable,#lifeTable {
+#tip,#latestTable,#courseTable,#exerTable,#lifeTable,#newTable{
   margin-top: 20px;
 }
 .tipText {

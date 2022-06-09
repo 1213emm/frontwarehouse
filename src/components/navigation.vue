@@ -11,7 +11,7 @@
       <span id="right_font"><img src="../assets/动态.png" height="32px"></span>
       <span id="headshot"><img src="../assets/用户.png" height="45px"></span>
     </span>
-    <span id="left">不知道怎么操作？点击前往<span style="color: deepskyblue;cursor: pointer;">新手上路！</span></span>
+<!--    <span id="left">不知道怎么操作？点击前往<span style="color: deepskyblue;cursor: pointer;">新手上路！</span></span>-->
   </div>
 </template>
 

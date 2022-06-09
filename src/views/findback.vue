@@ -110,7 +110,7 @@ export default {
 
 <style scoped>
 #login {
-  font-family: 'Noto Serif SC', serif;
+  font-family: '黑体','Noto Serif SC', serif;
   background-color: rgb(246,246,246);
   width: 100%;
   height: 100%;
