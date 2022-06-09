@@ -20,10 +20,10 @@
           <el-button class="act" icon="el-icon-warning" type="danger" @click="report" round>举报</el-button><!--举报-->
           <el-button class="act" icon="el-icon-chat-line-round" type="info" @click="comment" round>添加评论</el-button>
           <!--根据是否已收藏返回不同图标-->
-          <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="isFavor">取消收藏</el-button>
+          <el-button class="act" icon="el-icon-star-on" type="warning" @click="unfavor" round v-if="post.favorite">取消收藏</el-button>
           <el-button class="act" icon="el-icon-star-off" type="warning" @click="favor" round v-else>加入收藏</el-button>
           <!--根据是否已点赞返回不同图标-->
-          <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="isLike">取消点赞</el-button>
+          <el-button class="act" icon="el-icon-success" type="primary" @click="unlike" round v-if="post.liked">取消点赞</el-button>
           <el-button class="act" icon="el-icon-circle-check" type="primary" @click="like" round v-else>点赞</el-button>
         </div>
         <div id="addComment" v-if="addComment">
@@ -67,7 +67,9 @@ export default{
             "likes": 0,
             "available_level": 0,
             "resource": null,
-            "floor_num": 2
+            "floor_num": 2,
+            "favorite": true,
+            "liked": true
         },
       comments:[{
         id:1,
