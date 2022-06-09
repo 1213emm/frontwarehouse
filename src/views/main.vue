@@ -15,6 +15,7 @@
           <el-menu-item @click="toCourse" index="3"><i class="el-icon-magic-stick"></i>课程推荐</el-menu-item>
           <el-menu-item @click="toExer" index="4"><i class="el-icon-reading"></i>刷题</el-menu-item>
           <el-menu-item @click="toLife" index="5"><i class="el-icon-basketball"></i>校园周边</el-menu-item>
+          <el-menu-item @click="tore" index="6"><i class="el-icon-basketball"></i>资源共享</el-menu-item>
         </el-menu>
       </div>
       <div id="newTable" v-if="mainIndex===1">
@@ -75,6 +76,20 @@
       </div>
       <div id="lifeTable" v-if="mainIndex===5">
         <el-table :data="LifePosts" style="width: 100%">
+          <el-table-column type="index"> </el-table-column>
+          <el-table-column prop="title" label="标题"></el-table-column>
+          <el-table-column prop="user" label="作者"></el-table-column>
+          <el-table-column prop="post_date" label="日期"></el-table-column>
+          <el-table-column prop="likes" label="点赞数"></el-table-column>
+          <el-table-column prop="id">
+            <template slot-scope="scope">
+              <el-link type="primary" @click="toDetail(scope.row.id)">查看详情</el-link>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div id="lifeTable" v-if="mainIndex===6">
+        <el-table :data="rePosts" style="width: 100%">
           <el-table-column type="index"> </el-table-column>
           <el-table-column prop="title" label="标题"></el-table-column>
           <el-table-column prop="user" label="作者"></el-table-column>
@@ -158,7 +173,20 @@ export default {
             "available_level": 0,
             "resource": null,
             "floor_num": 2
-        }]
+        }],
+        rePosts:[
+        {
+            "id": 3,
+            "user": "朱姜逸扬",
+            "type": "资源共享",
+            "post_date": "2022-06-06T18:14:21.709Z",
+            "title": "资源共享",
+            "likes": 0,
+            "available_level": 0,
+            "resource": null,
+            "floor_num": 2
+        }
+        ]
     }
   },
   created(){
@@ -242,7 +270,7 @@ export default {
       .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
-              this.$axios({
+      this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/browse/',
         params:{   
@@ -253,6 +281,26 @@ export default {
           switch (res.data.errno) {
             case 0:
               this.LifePosts=res.data.posts;
+              break;
+            case 12001:
+              this.$message.error("请求方式错误");
+              break;
+          }
+        })
+      .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+       this.$axios({
+        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/post/browse/',
+        params:{   
+        type:"资源共享"
+        }       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.rePosts=res.data.posts;
               break;
             case 12001:
               this.$message.error("请求方式错误");
@@ -325,6 +373,9 @@ export default {
       this.mainIndex=5;
       //交互获得校园周边帖子
     },
+    tore: function(){
+      this.mainIndex=6;
+    }
   }
 }
 </script>
