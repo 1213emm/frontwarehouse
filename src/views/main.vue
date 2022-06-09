@@ -9,7 +9,7 @@
     </el-header>
     <el-main id="main">
       <div>
-        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" @select="handleSelect" active-text-color="#ffd04b">
+        <el-menu id="menu" mode="horizontal"  active-text-color="#ffd04b">
           <el-menu-item @click="toTip" index="1"><i class="el-icon-bicycle"></i>新手上路</el-menu-item>
           <el-menu-item @click="toLatest" index="2"><i class="el-icon-document-add"></i>最新发布</el-menu-item>
           <el-menu-item @click="toCourse" index="3"><i class="el-icon-magic-stick"></i>课程推荐</el-menu-item>

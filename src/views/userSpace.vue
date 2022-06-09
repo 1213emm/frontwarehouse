@@ -2,7 +2,7 @@
   <el-container id="personal">
     <el-main id="main">
         <div>
-        <el-menu id="menu" mode="horizontal" v-if="level==100" active-text-color="#ffd04b">
+        <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
@@ -11,7 +11,7 @@
         </el-menu>
       </div>
       <div>
-        <el-menu id="menu" :default-active="activeIndex" mode="horizontal" v-if="level<100" @select="handleSelect" active-text-color="#ffd04b">
+        <el-menu id="menu" mode="horizontal" v-if="this.level<100"  active-text-color="#ffd04b">
           <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
           <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
           <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
@@ -209,6 +209,7 @@ export default {
               this.username=res.data.username;
               this.description=res.data.description;
               this.major=res.data.major;
+              this.level=res.data.level;
               this.sex=res.data.sex;
               this.security_issue=res.data.security_issue;
               this.security_answer=res.data.security_answer;
@@ -514,7 +515,7 @@ export default {
         this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           pid: val4,
         })
         })
@@ -611,7 +612,7 @@ export default {
        this.$axios({
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
-        date: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
           id: val2,
         })
         })
@@ -710,7 +711,7 @@ export default {
         url: '/api/user/info/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
             username:this.username,
-            descpition:this.descpition,
+            description:this.description,
             grade:this.grade,
             major:this.grade,
             sex:this.sex,
