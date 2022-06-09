@@ -30,7 +30,6 @@
         <div id="infoTable" v-if="personalIndex===1">
           <div>
             <el-form  label-width="80px">
-              <h1></h1>
               <el-form-item label="头像">
                 <img :src="headshot">
               </el-form-item>
@@ -78,8 +77,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope1">
-                <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
-                <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
+                <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>&nbsp
+                <el-link type="primary" @click="tode2(scope1.row.id)">取消收藏</el-link>
               </template>
             </el-table-column>
           </el-table>
@@ -93,8 +92,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope2">
-                <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>
-                <el-button type="primary" @click="tode1(scope2.row.id)">删除帖子</el-button>
+                <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>&nbsp
+                <el-link type="primary" @click="tode1(scope2.row.id)">删除帖子</el-link>
               </template>
             </el-table-column>
           </el-table>
@@ -108,8 +107,8 @@
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope3">
-                <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>
-                <el-button type="primary" @click="tode3(scope3.row.id)">删除历史记录</el-button>
+                <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>&nbsp
+                <el-link type="primary" @click="tode3(scope3.row.id)">删除记录</el-link>
               </template>
             </el-table-column>
           </el-table>
@@ -119,19 +118,19 @@
             <h1>待更改</h1>
             <el-table-column prop="title" label="标题"></el-table-column>
             <el-table-column prop="user" label="作者"></el-table-column>
-            <el-table-column prop="user_id" label="学号"></el-table-column>
+            <el-table-column prop="user_id" label="学号" style="display: none"></el-table-column>
             <el-table-column prop="type" label="类型"></el-table-column>
             <el-table-column prop="post_date" label="日期"></el-table-column>
             <el-table-column prop="likes" label="点赞数"></el-table-column>
             <el-table-column prop="id" >
               <template slot-scope="scope4">
-                <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
-                <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
+                <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>&nbsp
+                <el-link type="primary" @click="tode4(scope4.row.id)">删除帖子</el-link>
               </template>
             </el-table-column>
             <el-table-column prop="user_id" >
               <template slot-scope="scope4">
-                <el-button type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-button>
+                <el-link type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-link>
               </template>
             </el-table-column>
           </el-table>
