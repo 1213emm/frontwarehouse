@@ -321,7 +321,7 @@ export default {
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-          id: val2,
+          post_id: val2,
         })
         })
         .then((res) => {
@@ -419,7 +419,7 @@ export default {
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/favorites/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-          id: val3,
+          post_id: val3,
           op:1
         })
         })
@@ -518,7 +518,7 @@ export default {
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/history/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-          pid: val4,
+          post_id: val4,
         })
         })
         .then((res) => {
@@ -616,7 +616,7 @@ export default {
         method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/delete/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
-          id: val2,
+          post_id: val2,
         })
         })
         .then((res) => {
