@@ -1,10 +1,10 @@
 <template>
   <div id="nav">
-<!--    <span v-if="!$store.state.islogin">--><span v-if="false">
+    <span v-if="!$store.state.islogin">
       <span id="right_font" v-on:click="gotologin"><img src="../assets/登录.png" height="32px"></span>
       <span id="right_text">您还未登录，请点击登录</span>
     </span>
-<!--    <span v-if="$store.state.islogin">--><span v-if="true">
+    <span v-if="$store.state.islogin">
       <span id="right_font" v-on:click="logout"><img src="../assets/注销.png" height="32px"></span>
       <span id="right_font" @click="toUser"><img src="../assets/用户.png" height="32px"></span>
       <span id="right_font" @click="toMain"><img src="../assets/主页.png" height="32px"></span>

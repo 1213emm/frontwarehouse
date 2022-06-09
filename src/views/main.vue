@@ -16,7 +16,7 @@
           </el-input>
         </div>
       </div>
-      <el-main id="main">
+      <el-main id="mid">
         <div>
           <el-menu id="menu" mode="horizontal"  active-text-color="#ffd04b">
             <el-menu-item @click="toTip" index="1"><i class="el-icon-bicycle"></i>新手上路</el-menu-item>
@@ -112,12 +112,22 @@
           </el-table>
         </div>
       </el-main>
-      <el-button class="footer" type="primary" block @click="publish" v-if="this.$store.state.islogin">发帖</el-button>
+      <div id="btn">
+        <el-button class="footer" type="primary" block @click="publish" v-if="this.$store.state.islogin">发帖</el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+#mid{
+  padding: 10px;
+  margin-top: 20px;
+
+}
+#btn{
+  margin-right: 10px;
+}
 #contaner{
   position: absolute;
   width: 100%;
