@@ -100,8 +100,6 @@ export default {
 }
 </script>
 
-</script>
-
 <style scoped>
 #login {
   font-family: 'Noto Serif SC', serif;
@@ -131,12 +129,12 @@ export default {
   height: 400px;
   padding: 0 25px 0 25px;
   line-height: 40px;
-  position: relative;
-  display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin: 0 auto;
   margin-top: 100px;
   box-shadow: darkgrey 1px 1px 1px 1px;
+  text-align: center;
 }
 #login .btn_login {
   margin-top: 25px;
