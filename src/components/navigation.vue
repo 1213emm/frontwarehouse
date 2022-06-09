@@ -19,6 +19,14 @@
 export default {
   name:"navigation",
   methods:{
+    toUser(){
+      this.$router.push('/userSpace');
+      this.$message.success("进入用户空间！");
+    },
+    toMain(){
+      this.$router.push('/');
+      this.$message.success("进入主页！");
+    },
     gotologin(){
       this.$router.push('/Login');
     },
