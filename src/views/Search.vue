@@ -59,10 +59,11 @@ export default {
   },
   created(){
       this.$axios({
-        method: 'get',           /* 指明请求方式，可以是 get 或 post */
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/post/search/',
-        params:{      
-        keyword:this.$store.state.input}       /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+          keyword:this.$store.state.input
+        })     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
         .then((res) => {
           switch (res.data.errno) {
@@ -71,6 +72,13 @@ export default {
               break;
             case 8001:
               this.$message.error("请求方式错误");
+              break;
+            case 8002:
+              this.$message.error("请先登陆");
+              this.$router.push('/login');
+              break;
+            case 8003:
+              this.$message.error("搜索关键字不能为空");
               break;
           }
         });
@@ -96,6 +104,13 @@ export default {
           switch (res.data.errno) {
             case 0:
               this.posts=res.data.posts;
+              break;
+            case 8001:
+              this.$message.error("请求方式错误");
+              break;
+            case 8002:
+              this.$message.error("请先登陆");
+              this.$router.push('/login');
               break;
             case 8003:
               this.$message.error("搜索关键字不能为空");
