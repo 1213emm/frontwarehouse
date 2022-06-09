@@ -5,7 +5,7 @@
           <span style="float:left">
             <el-button type="danger" icon="el-icon-back" @click="returnSearch">返回</el-button>
           </span>
-          <span style="float:left" id="author">作者：{{post.user}}</span>
+          <span style="float:left" id="author">楼主：{{post.user}}</span>
           <span style="float:left" id="postDate">{{post.post_date}}</span>
         </div>
         <div id="post">
@@ -34,12 +34,9 @@
         <div id="comments">
           <div class="floor" v-for="item in comments" :key="item.floor">
             <div class="speaker" v-if="item.floor!=1">
-              <span style="float:left;margin-top:10px">{{item.floor}}:</span>
-              <span style="float:left;margin-top:10px">{{item.user.username}}</span>
-              <!--根据是否已点赞返回不同图标-->
-              <el-button class="act1" icon="el-icon-success" type="primary" circle @click="unlike1(item.floor)" v-if="item.liked"></el-button>
-              <el-button class="act1" icon="el-icon-circle-check" type="primary" circle @click="like1(item.floor)" v-else></el-button>
-              <el-button class="act1" icon="el-icon-warning" type="danger" circle @click="report1(item.floor)"></el-button>
+              <span style="float:left;margin-top:10px">{{item.floor}}楼:</span>
+              <span style="float:left;margin-top:10px">{{item.user.username}}   评论时间:</span>
+              <span style="float:left;margin-top:10px">{{item.comment_time}}</span>
             </div>
             <div class="say" v-if="item.floor!=1"><el-card>{{item.content}}</el-card></div>
           </div>

@@ -3,6 +3,13 @@
       <el-header>
           <h1>发布帖子</h1>
       </el-header>
+          <el-header>
+        <div type="top">
+        <span style="float:left">
+            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
+        </span>
+        </div>
+    </el-header>
     <el-main id="main">
         <div id="post">
           <el-card>
@@ -48,7 +55,7 @@
   placeholder="请输入内容"
   v-model="textarea">
 </el-input>
-            </div>
+      </div>
           </el-card>
         </div>
     </el-main>
@@ -106,6 +113,9 @@ export default {
        methods:{
     personal: function(){
       this.$router.push('/');
+    },
+    returnd:function(){
+      this.$router.back();
     },
     ppp: function(){
       if (!this.$store.state.islogin) {
