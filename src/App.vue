@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav></nav>
     <router-view/>
+    <div id="down"></div>
   </div>
 </template>
 
@@ -39,47 +39,47 @@
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.nav1{
-  font-weight: bold;
-  color: #000000;
-  float:right;
-}
-.nav2{
-  font-weight: bold;
-  float:left;
-}
- a.router-link-exact-active {
-  color: #000000;
-}
-#app .wrap {
-  width: 60%;
-  height: 0%;
-  padding: 0 25px 0 25px;
-  line-height: 40px;
-  position: relative;
-  display: inline-block;
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-}
-.footer{
-  position: fixed;
-  bottom: 0;
-  width: 100px;
-  line-height: var(--footer-height);
-  background: #42b983;
-  color: #fff;
-}
-#window{
-  background-color: rgb(246,246,246);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
+/*#app {*/
+/*  font-family: Avenir, Helvetica, Arial, sans-serif;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*  text-align: center;*/
+/*  color: #2c3e50;*/
+/*}*/
+/*.nav1{*/
+/*  font-weight: bold;*/
+/*  color: #000000;*/
+/*  float:right;*/
+/*}*/
+/*.nav2{*/
+/*  font-weight: bold;*/
+/*  float:left;*/
+/*}*/
+/* a.router-link-exact-active {*/
+/*  color: #000000;*/
+/*}*/
+/*#app .wrap {*/
+/*  width: 60%;*/
+/*  height: 0%;*/
+/*  padding: 0 25px 0 25px;*/
+/*  line-height: 40px;*/
+/*  position: relative;*/
+/*  display: inline-block;*/
+/*  background-color: rgba(255, 255, 255, 0.85);*/
+/*  border-radius: 20px;*/
+/*}*/
+/*.footer{*/
+/*  position: fixed;*/
+/*  bottom: 0;*/
+/*  width: 100px;*/
+/*  line-height: var(--footer-height);*/
+/*  background: #42b983;*/
+/*  color: #fff;*/
+/*}*/
+/*#window{*/
+/*  background-color: rgb(246,246,246);*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*}*/
 </style>

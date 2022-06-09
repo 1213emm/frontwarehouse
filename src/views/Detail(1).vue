@@ -7,6 +7,8 @@
           </span>
           <span style="float:left;font-weight:bold" id="author">此为标题</span>
         </div>
+        {{ content }}
+<!--        post类是一层楼的整体-->
         <div class="post">
           <div class="content">
             <div class="image">
@@ -18,7 +20,7 @@
               </div>
             </div>
             <div class="text">
-              你好啊红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或红红火火恍恍惚惚或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或
+              123
             </div>
           </div>
           <div id="actions">
@@ -39,9 +41,10 @@
             <div v-if="this.$store.state.level==100" style="margin-top: 5px">
               禁言
             </div>
+            <div class="clear"></div>
           </div>
           <div class="text">
-            惚惚或或或或或或或或或1313131132
+            惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132惚惚或或或或或或或或或1313131132
           </div>
         </div>
         <div id="actions">
@@ -67,30 +70,15 @@
   </div>
 </template>
 
-<!--
-<style>
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-</style>
--->
-
 <style scoped>
+.clear{ clear:both}
 #detail {
   font-family: 'Noto Serif SC', serif;
-  margin-top: 10px;
+  margin-top: 0px;
   background-color: rgb(246,246,246);
   width: 100%;
   height: 100%;
-}
-#head {
-  background-color: #d4e7d9;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+  padding: 20px;
 }
 #main {
   background-color: white;
@@ -115,29 +103,27 @@
   margin: 0 auto;
   margin-top: 10px;
 }
+.content {
+  box-shadow: darkgrey 1px 1px 1px 1px ;
+  min-height: 120px;
+  margin: 0 auto;
+  padding: 10px;
+}
 .image{
-  height: 100%;
+  height: 10%;
   width: 120px;
   float: left;
   font-size: 18px;
   text-align: center;
+  border: 1px solid rgba(145,145,145,50%);
 }
 .text{
   text-align: left;
-  margin-top: 20px;
-}
-/*#postDate {
-  font-size: 120%;
-  margin-left: 20px;
   margin-top: 10px;
-}*/
-
-.content {
-  box-shadow: darkgrey 1px 1px 1px 1px ;
-  width: 680px;
-  min-height: 140px;
-  margin: 0 auto;
-  padding: 10px;
+  position: relative;
+  left: 10px;
+  line-height: 25px;
+  overflow: hidden;
 }
 #title {
   font-size: 200%;
@@ -152,26 +138,6 @@
   float: right;
   font-size :120%;
   margin-left: 20px;
-}
-
-#comments {
-
-}
-.floor {
-  margin-top: 10px;
-}
-.speaker {
-  font-size: 110%;
-  height:40px;
-  padding-right:10px;
-  padding-top:10px;
-}
-.say {
-  padding-top:10px;
-}
-.act1 {
-  float: left;
-  margin-left: 10px;
 }
 #textEdit{
   margin: 0 auto;
@@ -196,6 +162,13 @@
 
 <script>
 export default{
+  data() {
+    return {
+      //富文本内容
+      content: "",
+      editorOption: {}
+    };
+  },
   methods:{
     personal: function(){
       this.$router.push('/');

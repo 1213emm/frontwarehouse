@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+import './plugins/VueQuillEditor.js'
+
 import Axios from 'axios';//后台交互
 Vue.prototype.$axios=Axios;
 //defaults 设置全局默认路径

@@ -4,7 +4,7 @@
        <a href="#top"><img src="../assets/上.png" height="64px"></a>
       </div>
       <div class="tmp">
-        <a href="#bottom"><img src="../assets/下.png" height="64px"></a>
+        <a href="#down"><img src="../assets/下.png" height="64px"></a>
       </div>
     </div>
 </template>
