@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navigation></navigation>
     <router-view/>
     <div id="down"></div>
   </div>

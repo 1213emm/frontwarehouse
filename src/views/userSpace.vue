@@ -1,151 +1,182 @@
 <template>
-  <el-container id="personal">
-    <el-header>
-        <div type="top">
-        <span style="float:left">
-            <el-button type="danger" icon="el-icon-back" @click="returnd">返回</el-button>
-        </span>
+  <div id="contaner">
+    <div id="personal">
+      <el-main id="main">
+        <div>
+          <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
+            <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
+            <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
+            <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
+            <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
+            <el-menu-item @click="toReports" index="5"><i class="el-icon-warning"></i>被举报帖子</el-menu-item>
+            <el-menu-item @click="toban" index="6"><i class="el-icon-warning"></i>被禁言用户</el-menu-item>
+          </el-menu>
         </div>
-    </el-header>
-    <el-main id="main">
         <div>
-        <el-menu id="menu" mode="horizontal" v-if="this.level===100" active-text-color="#ffd04b">
-          <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
-          <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
-          <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
-          <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
-          <el-menu-item @click="toReports" index="5"><i class="el-icon-warning"></i>被举报帖子</el-menu-item>
-          <el-menu-item @click="toban" index="6"><i class="el-icon-warning"></i>被禁言用户</el-menu-item>
-        </el-menu>
-      </div>
-      <div>
-        <el-menu id="menu" mode="horizontal" v-if="this.level<100"  active-text-color="#ffd04b">
-          <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
-          <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
-          <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
-          <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
-        </el-menu>
-      </div>
-      <div id="infoTable" v-if="personalIndex===1">
-        <div>
-          <el-form  label-width="80px">
-          <h1></h1>
-            <el-form-item label="用户名">
-              <el-input class="infoInput" :placeholder="username" v-model="input2"></el-input>
-            </el-form-item>
-            <el-form-item label="等级">
-              <el-input class="infoInput" :placeholder="level" v-model="input1" :disabled="true"></el-input>
-            </el-form-item>
-            <el-form-item label="简介">
-              <el-input class="infoInput" :placeholder="description" v-model="input3"></el-input>
-            </el-form-item>
-            <el-form-item label="年级">
-              <el-input class="infoInput" :placeholder="grade" v-model="input4"></el-input>
-            </el-form-item>
-            <el-form-item label="专业">
-              <el-input class="infoInput" :placeholder="major" v-model="input5"></el-input>
-            </el-form-item>
-            <el-form-item label="性别">
-              <el-select class="infoInput" :placeholder="sex" v-model="input6">
-                <el-option label="男" value="男"></el-option>
-                <el-option label="女" value="女"></el-option>
-                <el-option label="秘密" value="秘密"></el-option>
-              </el-select>
-            </el-form-item>
+          <el-menu id="menu" mode="horizontal" v-if="this.level<100"  active-text-color="#ffd04b">
+            <el-menu-item @click="toInfo" index="1"><i class="el-icon-info"></i>个人信息</el-menu-item>
+            <el-menu-item @click="toFavor" index="2"><i class="el-icon-star-on"></i>收藏夹</el-menu-item>
+            <el-menu-item @click="toHistory" index="3"><i class="el-icon-s-order"></i>历史记录</el-menu-item>
+            <el-menu-item @click="toMyPost" index="4"><i class="el-icon-edit-outline"></i>已发帖子</el-menu-item>
+          </el-menu>
+        </div>
+        <div id="infoTable" v-if="personalIndex===1">
+          <div>
+            <el-form  label-width="80px">
+              <h1></h1>
+              <el-form-item label="用户名">
+                <el-input class="infoInput" :placeholder="username" v-model="input2"></el-input>
+              </el-form-item>
+              <el-form-item label="等级">
+                <el-input class="infoInput" :placeholder="level" v-model="input1" :disabled="true"></el-input>
+              </el-form-item>
+              <el-form-item label="简介">
+                <el-input class="infoInput" :placeholder="description" v-model="input3"></el-input>
+              </el-form-item>
+              <el-form-item label="年级">
+                <el-input class="infoInput" :placeholder="grade" v-model="input4"></el-input>
+              </el-form-item>
+              <el-form-item label="专业">
+                <el-input class="infoInput" :placeholder="major" v-model="input5"></el-input>
+              </el-form-item>
+              <el-form-item label="性别">
+                <el-select class="infoInput" :placeholder="sex" v-model="input6">
+                  <el-option label="男" value="男"></el-option>
+                  <el-option label="女" value="女"></el-option>
+                  <el-option label="秘密" value="秘密"></el-option>
+                </el-select>
+              </el-form-item>
               <el-form-item label="密保问题">
-              <el-input class="infoInput" :placeholder="security_issue" v-model="input7"></el-input>
-            </el-form-item>
+                <el-input class="infoInput" :placeholder="security_issue" v-model="input7"></el-input>
+              </el-form-item>
               <el-form-item label="答案">
-              <el-input class="infoInput" :placeholder="security_answer" v-model="input8"></el-input>
-            </el-form-item>
+                <el-input class="infoInput" :placeholder="security_answer" v-model="input8"></el-input>
+              </el-form-item>
               <el-form-item label="密码">
-              <el-input class="infoInput" :placeholder="password" v-model="input9"></el-input>
-            </el-form-item>          
-          </el-form>
-          <el-button type="primary" id="editFinish" @click="save">保存个人信息</el-button>
+                <el-input class="infoInput" :placeholder="password" v-model="input9"></el-input>
+              </el-form-item>
+            </el-form>
+            <el-button type="primary" id="editFinish" @click="save">保存个人信息</el-button>
+          </div>
         </div>
-      </div>
-      <div id="favorTable" v-if="personalIndex===2">
-        <el-table :data="posts3" style="width: 100%">
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="user" label="作者"></el-table-column>
-          <el-table-column prop="type" label="类型"></el-table-column>
-          <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column prop="id" >
-            <template slot-scope="scope1">
-              <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div id="favorTable" v-if="personalIndex===4">
-        <el-table :data="posts1" style="width: 100%">
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="user" label="作者"></el-table-column>
-          <el-table-column prop="type" label="类型"></el-table-column>
-          <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column prop="id" >
-            <template slot-scope="scope2">
-              <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode1(scope2.row.id)">删除帖子</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div id="favorTable" v-if="personalIndex===3">
-        <el-table :data="posts2" style="width: 100%">
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="user" label="作者"></el-table-column>
-                    <el-table-column prop="type" label="类型"></el-table-column>
-          <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column prop="id" >
-            <template slot-scope="scope3">
-              <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode3(scope3.row.id)">删除历史记录</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+        <div id="favorTable" v-if="personalIndex===2">
+          <el-table :data="posts3" style="width: 100%">
+            <el-table-column prop="title" label="标题"></el-table-column>
+            <el-table-column prop="user" label="作者"></el-table-column>
+            <el-table-column prop="type" label="类型"></el-table-column>
+            <el-table-column prop="post_date" label="日期"></el-table-column>
+            <el-table-column prop="likes" label="点赞数"></el-table-column>
+            <el-table-column prop="id" >
+              <template slot-scope="scope1">
+                <el-link type="primary" @click="toDetail(scope1.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode2(scope1.row.id)">取消收藏</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div id="favorTable" v-if="personalIndex===4">
+          <el-table :data="posts1" style="width: 100%">
+            <el-table-column prop="title" label="标题"></el-table-column>
+            <el-table-column prop="user" label="作者"></el-table-column>
+            <el-table-column prop="type" label="类型"></el-table-column>
+            <el-table-column prop="post_date" label="日期"></el-table-column>
+            <el-table-column prop="likes" label="点赞数"></el-table-column>
+            <el-table-column prop="id" >
+              <template slot-scope="scope2">
+                <el-link type="primary" @click="toDetail(scope2.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode1(scope2.row.id)">删除帖子</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div id="favorTable" v-if="personalIndex===3">
+          <el-table :data="posts2" style="width: 100%">
+            <el-table-column prop="title" label="标题"></el-table-column>
+            <el-table-column prop="user" label="作者"></el-table-column>
+            <el-table-column prop="type" label="类型"></el-table-column>
+            <el-table-column prop="post_date" label="日期"></el-table-column>
+            <el-table-column prop="likes" label="点赞数"></el-table-column>
+            <el-table-column prop="id" >
+              <template slot-scope="scope3">
+                <el-link type="primary" @click="toDetail(scope3.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode3(scope3.row.id)">删除历史记录</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
         <div id="reported" v-if="personalIndex===5">
-        <el-table :data="posts4" style="width: 100%">
-        <h1>待更改</h1>
-          <el-table-column prop="title" label="标题"></el-table-column>
-          <el-table-column prop="user" label="作者"></el-table-column>
-          <el-table-column prop="userid" label="学号"></el-table-column>
-          <el-table-column prop="type" label="类型"></el-table-column>
-          <el-table-column prop="post_date" label="日期"></el-table-column>
-          <el-table-column prop="likes" label="点赞数"></el-table-column>
-          <el-table-column prop="id" >
-            <template slot-scope="scope4">
-              <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
-              <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
-            </template>
-          </el-table-column>
-          <el-table-column prop="user_id" >
-            <template slot-scope="scope4">
-              <el-button type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-      <div id="unban" v-if="personalIndex===6">
-        <el-table :data="users" style="width: 100%">
-          <el-table-column prop="id" label="学号"></el-table-column>
-          <el-table-column prop="username" label="用户名"></el-table-column>
-          <el-table-column prop="id">
-            <template slot-scope="scope5">
-              <el-button type="primary" @click="unban(scope5.row.id)">解除禁言</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
-    </el-main>
-  </el-container>
+          <el-table :data="posts4" style="width: 100%">
+            <h1>待更改</h1>
+            <el-table-column prop="title" label="标题"></el-table-column>
+            <el-table-column prop="user" label="作者"></el-table-column>
+            <el-table-column prop="userid" label="学号"></el-table-column>
+            <el-table-column prop="type" label="类型"></el-table-column>
+            <el-table-column prop="post_date" label="日期"></el-table-column>
+            <el-table-column prop="likes" label="点赞数"></el-table-column>
+            <el-table-column prop="id" >
+              <template slot-scope="scope4">
+                <el-link type="primary" @click="toDetail(scope4.row.id)">查看详情</el-link>
+                <el-button type="primary" @click="tode4(scope4.row.id)">删除帖子</el-button>
+              </template>
+            </el-table-column>
+            <el-table-column prop="user_id" >
+              <template slot-scope="scope4">
+                <el-button type="primary" @click="ban(scope4.row.user_id)">禁言用户</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div id="unban" v-if="personalIndex===6">
+          <el-table :data="users" style="width: 100%">
+            <el-table-column prop="id" label="学号"></el-table-column>
+            <el-table-column prop="username" label="用户名"></el-table-column>
+            <el-table-column prop="id">
+              <template slot-scope="scope5">
+                <el-button type="primary" @click="unban(scope5.row.id)">解除禁言</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-main>
+    </div>
+  </div>
 </template>
+
+<style scoped>
+#contaner{
+  position: absolute;
+  width: 100%;
+  min-height: 800px;
+  background-color: rgb(246,246,246);
+}
+#personal {
+  font-family: 'Noto Serif SC', serif;
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 20px;
+  box-shadow: darkgrey 1px 1px 1px 1px;
+}
+#head {
+  background-color: #d4e7d9;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+#main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+}
+#aside {
+  background-color: #D3DCE6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+#favorTable{
+  margin-top: 20px;
+}
+</style>
 
 <script>
 import qs from "qs";

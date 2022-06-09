@@ -97,6 +97,7 @@ export default {
     },
     toMain: function (){
       this.$router.push('/');
+      this.$message.success("返回成功！");
     },
     
   }

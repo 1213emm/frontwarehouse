@@ -1,7 +1,10 @@
 <template>
   <div id="login" class="login">
     <div class="wrap">
-      <h1>找回密码</h1>
+      <div id="return">
+        <span @click="toLogin" style="cursor: pointer"><img src="../assets/返回.png" height="16px">返回</span>
+      </div>
+      <h1 style="font-weight: bold;color: #409EFF">找回密码</h1>
       <el-form :model="form" ref="form" class="form">
         <el-form-item prop="username">
           <el-input placeholder="学号" type="username"  v-model="form.id" autocomplete="off"></el-input>
@@ -40,7 +43,11 @@ export default {
     }
   },
   methods: {
-      show: function(){
+    toLogin: function (){
+      this.$router.push('/login');
+      this.$message.success("返回成功！");
+    },
+    show: function(){
       if(this.form.id === ''){
         this.$message.warning("请输入学号");
         return;
@@ -100,7 +107,6 @@ export default {
 }
 </script>
 
-</script>
 
 <style scoped>
 #login {
@@ -128,15 +134,15 @@ export default {
 }
 #login .wrap {
   width: 300px;
-  height: 400px;
+  height: 430px;
   padding: 0 25px 0 25px;
   line-height: 40px;
-  position: relative;
-  display: inline-block;
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
+  margin: 0 auto;
   margin-top: 100px;
   box-shadow: darkgrey 1px 1px 1px 1px;
+  text-align: center;
 }
 #login .btn_login {
   margin-top: 25px;
@@ -147,5 +153,13 @@ export default {
   font-family: 'Noto Serif SC', serif;
   width: 100%;
   height: 38px;
+}
+#return{
+  font-size: 15px;
+  color: #8c939d;
+  text-align: left;
+  margin-left: 0px;
+  height: 20px;
+  width: auto;
 }
 </style>

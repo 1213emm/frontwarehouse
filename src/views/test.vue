@@ -1,6 +1,6 @@
 <template>
   <div>
-    <calendar></calendar>
+    <navigation></navigation>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import Updown from "@/components/updown";
 import Slid from "@/components/slid";
 import Calendar from "@/components/calendar";
 export default {
-  components: {Calendar}
+  components: {Navigation, Calendar}
 }
 </script>
 

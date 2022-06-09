@@ -56,6 +56,7 @@ export default {
   methods: {
     toLogin: function (){
       this.$router.push('/login');
+      this.$message.success("返回成功！");
     },
     register: function () {
       // 检查表单是否有填写内容
