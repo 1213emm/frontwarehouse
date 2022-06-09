@@ -88,6 +88,7 @@
         </el-table>
       </div>
     </el-main>
+    <el-button class="footer" type="primary" block @click="publish" v-if="!this.$store.state.islogin">发帖</el-button>
   </el-container>
 </template>
 
@@ -263,6 +264,9 @@ export default {
       });
   }, 
   methods: {
+    publish(){
+          this.$router.push('/publish');
+        },
     search:function () {
        if (!this.$store.state.islogin){
                 this.$router.push('/Login');

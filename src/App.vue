@@ -14,7 +14,6 @@
     <el-main> 
          <router-view/>
     </el-main>
-        <el-button class="footer" type="primary" block @click="publish" v-if="this.$store.state.islogin">发帖</el-button>
   </el-container>
   </div>
 </template>
@@ -36,7 +35,7 @@
     }
   },
   created(){
-            //在页面加载时读取sessionStorage里的状态信息
+      //在页面加载时读取sessionStorage里的状态信息
       if(sessionStorage.getItem('storeState')){
           //replaceState，替换store的根状态
           this.$store.replaceState(Object.assign({},this.$store.state,JSON.parse(sessionStorage.getItem('storeState'))))
@@ -69,9 +68,6 @@
         setTimeout(() => {
                 this.$router.push('/');
             }, 1000);
-        },
-        publish(){
-          this.$router.push('/publish');
         }
       }
     }
