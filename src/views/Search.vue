@@ -3,7 +3,7 @@
     <el-header>
     <div class="wrap">
 <el-input v-model="input" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
-<template slot="append"><el-button type="primary" icon="el-icon-search">搜索</el-button></template>
+<template slot="append"><el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button></template>
 </el-input>
 </div>
     </el-header>
@@ -71,6 +71,7 @@ export default {
   methods:{
     search: function(){
       if (this.$session.get("id")==0) {
+        this.$message.error("请登录");
         this.$router.push("/Login");
       } else {
         this.$store.state.input = this.input;
@@ -90,7 +91,11 @@ export default {
               this.$message.error("搜索关键字不能为空");
               break;
           }
-        });
+        }) 
+         .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+        ;
       }
     },
     toDetail(val) { 

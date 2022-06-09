@@ -99,7 +99,7 @@ export default {
           data: qs.stringify({
             /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
             title:this.tit,
-            type:"课程推荐",
+            type:this.type,
             content:this.textarea,
             available_level:this.available_level
           }),
@@ -107,7 +107,7 @@ export default {
           switch (res.data.errno) {
             case 0:
               this.$message.success("发布成功");
-              this.$router.back();
+              this.$router.push('/');
               break;
             case 6002:
               this.$message.error("用户未登陆");

@@ -328,10 +328,10 @@ export default {
             case 0:
               this.$message.success("删帖成功");
               break;
-            case 140003:
+            case 14003:
               this.$message.error("帖子ID不能为空");
               break;
-            case 140004:
+            case 14004:
               this.$message.error("帖子不存在");
               break;
           }
@@ -426,10 +426,10 @@ export default {
             case 0:
               this.$message.success("移除成功");
               break;
-            case 110002:
+            case 11002:
               this.$message.error("帖子ID不能为空");
               break;
-            case 110005:
+            case 11005:
               this.$message.error("帖子未收藏");
               break;
           }
@@ -437,7 +437,7 @@ export default {
         .catch(err => {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
-              this.$axios({
+        this.$axios({
         method: 'get',           /* 指明请求方式，可以是 get 或 post */
         url: '/api/user/info/'     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
         })
@@ -620,10 +620,10 @@ export default {
             case 0:
               this.$message.success("删帖成功");
               break;
-            case 140003:
+            case 14003:
               this.$message.error("帖子ID不能为空");
               break;
-            case 140004:
+            case 14004:
               this.$message.error("帖子不存在");
               break;
           }
@@ -704,6 +704,31 @@ export default {
         console.log(err);         /* 若出现异常则在终端输出相关信息 */
       });
     },
+    save: function(){
+        this.$axios({
+        method: 'post',           /* 指明请求方式，可以是 get 或 post */
+        url: '/api/user/info/',     /* 指明后端 api 路径，由于在 main.js 已指定根路径，因此在此处只需写相对路由 */
+        data: qs.stringify({      /* 需要向后端传输的数据，此处使用 qs.stringify 将 json 数据序列化以发送后端 */
+            username:this.username,
+            descpition:this.descpition,
+            grade:this.grade,
+            major:this.grade,
+            sex:this.sex,
+            security_issue:this.security_issue,
+            security_answer:this.security_answer
+        })
+        })
+        .then((res) => {
+          switch (res.data.errno) {
+            case 0:
+              this.$message.success("保存成功");
+              break;
+          }
+        })
+        .catch(err => {
+        console.log(err);         /* 若出现异常则在终端输出相关信息 */
+      });
+    }
   }
 };
 </script>

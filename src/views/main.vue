@@ -3,7 +3,7 @@
     <el-header>
       <div class="wrap">
         <el-input v-model="input1" placeholder="请输入关键词进行搜索"  @keyup.enter.native="search">
-          <template slot="append"><el-button type="primary" icon="el-icon-search">搜索</el-button></template>
+          <template slot="append"><el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button></template>
         </el-input>
       </div>
     </el-header>
