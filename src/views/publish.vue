@@ -153,6 +153,9 @@ export default {
             case 6006:
               this.$message.error("权限等级不能高于用户等级");
               break;
+            case 6007:
+              this.$message.error("您已被禁言");
+              break;
           }
         });
       }

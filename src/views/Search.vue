@@ -170,8 +170,11 @@ export default {
               this.$store.state.postid=val;
               this.$router.push("/detail");
               break;
-            case 12001:
+            case 7001:
               this.$message.error("请求方式错误");
+              break;
+            case 7006:
+              this.$message.error("用户等级不足");
               break;
           }
         })

@@ -517,6 +517,9 @@ export default{
           case 7006:
             this.$message.error("用户等级不够");
             break;
+          case 7007:
+            this.$message.error("您已被禁言");
+            break;
         }
       });
       this.$axios({
