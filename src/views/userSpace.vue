@@ -31,7 +31,7 @@
           <div>
             <el-form  label-width="80px">
               <el-form-item label="头像">
-                <img :src="headshot">
+                <img :src="headshot" height="200px" width="auto">
               </el-form-item>
               <el-form-item label="用户名">
                 <el-input class="infoInput" :placeholder="username" v-model="input2"></el-input>
