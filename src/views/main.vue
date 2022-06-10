@@ -24,7 +24,7 @@
             <el-menu-item @click="toCourse" index="3"><i class="el-icon-magic-stick"></i>课程推荐</el-menu-item>
             <el-menu-item @click="toExer" index="4"><i class="el-icon-reading"></i>刷题</el-menu-item>
             <el-menu-item @click="toLife" index="5"><i class="el-icon-basketball"></i>校园周边</el-menu-item>
-            <el-menu-item @click="tore" index="6"><i class="el-icon-basketball"></i>资源共享</el-menu-item>
+            <el-menu-item @click="tore" index="6"><i class="el-icon-upload"></i>资源共享</el-menu-item>
           </el-menu>
         </div>
         <div id="newTable" v-if="mainIndex===1">
